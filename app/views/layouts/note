@@ -1,0 +1,4 @@
+    <script type="text/javascript">
+      window.hamburger-icon = "<%= image_url('hamburger_menu.png') %>";
+      window.full-logo = "<%= image_url('full_logo.png') %>";
+    </script> 
