@@ -460,12 +460,12 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
         value: this.props.formType
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "alternative"
-      }, " ", this.props.navLink, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " ", this.props.navLink, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "alternative",
         onClick: function onClick() {
           return _this3.props.demoLogin();
         }
-      }, "Demo User"))));
+      }, "Demo User"));
     }
   }]);
 

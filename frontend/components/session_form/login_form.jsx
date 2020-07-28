@@ -68,9 +68,9 @@ class LoginForm extends React.Component {
                         <br />
                         <input className="session-submit" type="submit" value={this.props.formType} />
                         <p className='alternative'> {this.props.navLink} </p>
-                        <button className='alternative' onClick={() => this.props.demoLogin()}>Demo User</button> 
                     </div>
                 </form>
+                <button className='alternative' onClick={() => this.props.demoLogin()}>Demo User</button> 
             </div>
         );
     }
