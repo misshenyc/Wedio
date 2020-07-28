@@ -12,6 +12,10 @@ class LoginForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillUnmount(){
+        this.props.clearErrors();
+    }
+
     update(field) {
         return e => this.setState({
             [field]: e.currentTarget.value
@@ -35,6 +39,8 @@ class LoginForm extends React.Component {
             </ul>
         );
     }
+
+
 
     render() {
         return (
@@ -62,6 +68,7 @@ class LoginForm extends React.Component {
                         <br />
                         <input className="session-submit" type="submit" value={this.props.formType} />
                         <p className='alternative'> {this.props.navLink} </p>
+                        <button className='alternative' onClick={() => this.props.demoLogin()}>Demo User</button> 
                     </div>
                 </form>
             </div>
