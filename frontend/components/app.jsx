@@ -16,11 +16,8 @@ const App = () => (
     <div>
         <header>
             <Link to="/" className="header-link">
-            <div className = 'header-images'>
-                {/* <img src = {window.hamburger-icon}/>            */}
-                {/* <img src = {window.full-logo}/>            */}
-                <h1> Wedio </h1>
-            </div>
+                <img id = 'hamburger-menu' src = {window.hamburgerIcon}/>           
+                <img id = 'full-logo' src = {window.fullLogo}/>           
             </Link>
             <GreetingContainer />
         </header>
