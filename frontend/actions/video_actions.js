@@ -30,10 +30,11 @@ export const fetchVideos = () => dispatch => (
         .then(videos => dispatch(receiveAllVideos(videos)))
 );
 
-export const fetchVideo = videoId => dispatch => (
+export const fetchVideo = videoId => dispatch => {
+    // debugger
     VideoAPIUtil.fetchVideo(videoId)
         .then(video => dispatch(receiveVideo(video)))
-);
+}
 
 export const createVideo = video => dispatch => (
     VideoAPIUtil.createVideo(video)

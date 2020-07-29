@@ -10,11 +10,11 @@ class VideoIndex extends React.Component {
         const videoLis = this.props.videos.map(video => {
             return <li key = {video.id}>
                 <Link to={`/videos/${video.id}`}>{video.title}</Link>
-                {video.creator_id}
-                {video.description}
+                by {video.creator_id}
+                details: {video.description}
             </li>
         })
-        debugger;
+        // debugger;
         return (
             <div>
                 {videoLis}
