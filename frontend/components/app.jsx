@@ -1,16 +1,11 @@
 import React from 'react';
 import GreetingContainer from '../components/greeting/greeting_container'
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import {
-    Route,
-    Redirect,
-    Switch,
-    Link,
-    HashRouter
-} from 'react-router-dom';
+import {Route,Redirect,Switch,Link,HashRouter} from 'react-router-dom';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
-
+import VideoIndexContainer from './videos/video_index_container';
+import VideoShowContainer from './videos/video_show_container';
 
 const App = () => (
     <div>
@@ -22,7 +17,9 @@ const App = () => (
             <GreetingContainer />
         </header>
         <Switch>
+            <Route exact path="/" component={VideoIndexContainer} />
             <AuthRoute exact path="/login" component={LogInFormContainer} />
+            <ProtectedRoute exact path="/videos/:videoId" component={VideoShowContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
         </Switch>
     </div>
