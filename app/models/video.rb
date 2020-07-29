@@ -6,6 +6,5 @@ class Video < ApplicationRecord
         class_name: :User
 
     has_one_attached :videoclip
-    # TODO: has_many_attached?
 end
 

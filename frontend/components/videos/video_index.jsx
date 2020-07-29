@@ -12,15 +12,22 @@ class VideoIndex extends React.Component {
                 <Link to={`/videos/${video.id}`}>{video.title}</Link>
                 by {video.creator_id}
                 details: {video.description}
+                {video.clipUrl}
             </li>
         })
         // debugger;
         return (
-            <div>
+            <div className = 'video-index'>
                 {videoLis}
             </div>
         );
     }
 }
+
+// TODO: add video clip tag once clip url works: 
+{/* <video width="400" controls>
+    <source src="mov_bbb.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video> */}
 
 export default VideoIndex;

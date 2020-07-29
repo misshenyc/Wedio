@@ -7,6 +7,7 @@ import LogInFormContainer from './session_form/login_form_container';
 import VideoIndexContainer from './videos/video_index_container';
 import VideoShowContainer from './videos/video_show_container';
 import EditVideoContainer from './videos/edit_video_container';
+import SideBar from './sidebar/sidebar'
 
 const App = () => (
     <div>
@@ -16,6 +17,7 @@ const App = () => (
                 <img id = 'full-logo' src = {window.fullLogo}/>           
             </Link>
             <GreetingContainer />
+            <SideBar />
         </header>
         <Switch>
             <Route exact path="/" component={VideoIndexContainer} />
