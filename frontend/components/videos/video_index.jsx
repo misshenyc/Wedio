@@ -8,13 +8,16 @@ class VideoIndex extends React.Component {
 
     render() {
         const videoLis = this.props.videos.map(video => {
-            return <li key = {video.id}>
+            return (<li key = {video.id}>
+                <video width = '400' controls>
+                    <source src = {video.clipUrl}></source>
+                </video>
+                <br/>
                 <Link to={`/videos/${video.id}`}>{video.title}</Link>
                 by {video.creator_id}
                 details: {video.description}
-                {video.clipUrl}
             </li>
-        })
+        )})
         // debugger;
         return (
             <div className = 'video-index'>
@@ -24,10 +27,6 @@ class VideoIndex extends React.Component {
     }
 }
 
-// TODO: add video clip tag once clip url works: 
-{/* <video width="400" controls>
-    <source src="mov_bbb.mp4" type="video/mp4">
-    Your browser does not support HTML video.
-</video> */}
+// TODO: Link to users/userid 
 
 export default VideoIndex;

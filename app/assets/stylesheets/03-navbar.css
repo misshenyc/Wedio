@@ -1,4 +1,4 @@
-.side-bar-container{
+.sidebar{
     padding: 1px 1.5px;
     background-color:white;
     width: 72px;
@@ -12,10 +12,6 @@
     flex-direction: column;
     justify-content: flex-start;
     font-size: 12px;
-}
-
-.side-bar-container:hover{
-    overflow-y: scroll;
 }
 
 .home, .library, .upload, .linkedin, .github {

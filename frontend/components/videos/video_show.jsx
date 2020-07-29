@@ -11,7 +11,10 @@ class VideoShow extends React.Component {
         const { video } = this.props;
         if (!video) return null;
         return (
-            <div>
+            <div className = 'video-show'>
+                <video width='400' controls>
+                    <source src={video.clipUrl}></source>
+                </video>
                 <h1>{video.title}</h1>
                 <p>{video.description}</p>
             </div>

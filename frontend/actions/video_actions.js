@@ -35,14 +35,15 @@ export const fetchVideos = () => dispatch => {
 
 export const fetchVideo = videoId => dispatch => {
     // debugger
-    VideoAPIUtil.fetchVideo(videoId)
+    return VideoAPIUtil.fetchVideo(videoId)
         .then(video => dispatch(receiveVideo(video)))
 }
 
-export const createVideo = video => dispatch => (
-    VideoAPIUtil.createVideo(video)
-        .then(video => dispatch(receiveVideo(video)))
-);
+export const createVideo = video => dispatch => {
+    // debugger
+    return VideoAPIUtil.createVideo(video)
+        .then(video => dispatch(receiveVideo(video)))    
+}
 
 export const updateVideo = video => dispatch => (
     VideoAPIUtil.updateVideo(video)

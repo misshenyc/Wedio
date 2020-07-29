@@ -1,19 +1,22 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import VideoStudio from './video_studio';
+import CreateVideo from './create_video';
 import { createVideo } from '../../actions/video_actions';
 
 
-const msp = state => ({
+const msp = state => {
+    // debugger
+    return {
     video: {
         title: '',
         description: ''
     },
-    formType: 'New Video'
-});
+    formType: 'Create Video'
+}};
 
-const mdp = dispatch => ({
-    action: video => dispatch(createVideo(video))
-});
+const mdp = dispatch => {
+    // debugger
+    return { action: video => dispatch(createVideo(video))}
+};
 
-export default connect(msp, mdp)(VideoStudio);
+export default connect(msp, mdp)(CreateVideo);
