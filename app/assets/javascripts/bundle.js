@@ -238,7 +238,7 @@ var fetchVideo = function fetchVideo(videoId) {
 };
 var createVideo = function createVideo(video) {
   return function (dispatch) {
-    // debugger
+    debugger;
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["createVideo"](video).then(function (video) {
       return dispatch(receiveVideo(video));
     });
@@ -918,9 +918,9 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, CreateVideo);
 
     // debugger
-    _this = _super.call(this, props);
+    _this = _super.call(this, props); // debugger
+
     _this.state = _this.props.video;
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -929,7 +929,12 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       // debugger
       e.preventDefault();
-      this.props.action(this.state);
+      var formData = new FormData();
+      formData.append('video[title]', this.state.title);
+      formData.append('video[description]', this.state.description);
+      formData.append('video[videoclip]', this.state.videoFile); // debugger
+
+      this.props.createVideo(formData);
     }
   }, {
     key: "update",
@@ -942,13 +947,23 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      // e.preventDefault();
+      // debugger
+      this.setState({
+        videoFile: e.currentTarget.files[0]
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       // debugger
+      console.log(this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "create-video"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.formType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
+        onSubmit: this.handleSubmit.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.title,
@@ -956,7 +971,10 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.description,
         onChange: this.update('description')
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, this.props.formType)));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handleFile.bind(this)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, this.props.formType)));
     }
   }]);
 
@@ -990,7 +1008,8 @@ var msp = function msp(state) {
   return {
     video: {
       title: '',
-      description: ''
+      description: '',
+      videoFile: null
     },
     formType: 'Create Video'
   };
@@ -999,7 +1018,7 @@ var msp = function msp(state) {
 var mdp = function mdp(dispatch) {
   // debugger
   return {
-    action: function action(video) {
+    createVideo: function createVideo(video) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_3__["createVideo"])(video));
     }
   };
@@ -1755,12 +1774,13 @@ var fetchVideo = function fetchVideo(videoId) {
   });
 };
 var createVideo = function createVideo(video) {
+  // debugger;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/",
-    data: {
-      video: video
-    }
+    data: video,
+    contentType: false,
+    processData: false
   });
 };
 var updateVideo = function updateVideo(video) {

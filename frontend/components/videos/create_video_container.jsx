@@ -9,14 +9,15 @@ const msp = state => {
     return {
     video: {
         title: '',
-        description: ''
+        description: '',
+        videoFile: null,
     },
     formType: 'Create Video'
 }};
 
 const mdp = dispatch => {
     // debugger
-    return { action: video => dispatch(createVideo(video))}
+    return { createVideo: video => dispatch(createVideo(video))}
 };
 
 export default connect(msp, mdp)(CreateVideo);

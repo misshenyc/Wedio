@@ -4,14 +4,19 @@ class CreateVideo extends React.Component {
     constructor(props) {
         // debugger
         super(props);
-        this.state = this.props.video;
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // debugger
+        this.state = this.props.video
     }
 
     handleSubmit(e) {
         // debugger
         e.preventDefault();
-        this.props.action(this.state);
+        const formData = new FormData();
+        formData.append('video[title]', this.state.title);
+        formData.append('video[description]', this.state.description);
+        formData.append('video[videoclip]', this.state.videoFile);
+        // debugger
+        this.props.createVideo(formData);
     }
 
     update(field) {
@@ -19,12 +24,19 @@ class CreateVideo extends React.Component {
         return e => this.setState({ [field]: e.currentTarget.value });
     }
 
+    handleFile(e){
+        // e.preventDefault();
+        // debugger
+        this.setState({videoFile: e.currentTarget.files[0]})
+    }
+
     render() {
         // debugger
+        console.log(this.state);
         return (
             <div className='create-video'>
                 <h3>{this.props.formType}</h3>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
                         Title
                         <br />
@@ -44,6 +56,8 @@ class CreateVideo extends React.Component {
                         />
                     </label>
                     <br />
+                    <input type="file"
+                        onChange={this.handleFile.bind(this)} />
                     <button>{this.props.formType}</button>
                 </form>
             </div>

@@ -40,7 +40,7 @@ export const fetchVideo = videoId => dispatch => {
 }
 
 export const createVideo = video => dispatch => {
-    // debugger
+    debugger
     return VideoAPIUtil.createVideo(video)
         .then(video => dispatch(receiveVideo(video)))    
 }
