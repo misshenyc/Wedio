@@ -31,11 +31,10 @@ export const updateVideo = (video) => {
     })
 }
 
-export const deleteVideo = (video) => {
+export const deleteVideo = (videoId) => {
     return $.ajax({
         method: 'DELETE',
-        url: `/api/videos/`,
-        data: { video }
+        url: `/api/videos/${videoId}`,
     })
 }
 

@@ -3,18 +3,35 @@ import { connect } from 'react-redux';
 import EditVideo from './edit_video';
 import { fetchVideo, updateVideo, deleteVideo } from '../../actions/video_actions';
 
+class Wrapper extends React.Component {
+    componentDidMount() {
+        this.props.fetchVideo(this.props.match.params.videoId);
+    }
+
+    render(){
+        const {video, updateVideo, deleteVideo} = this.props
+        if (!video) return null;
+        return(
+            <EditVideo
+                video = {video}
+                updateVideo = {updateVideo}
+                deleteVideo = {deleteVideo}
+            />
+        )
+    }
+}
+
 
 const msp = (state, ownProps) => {
     // debugger;
     return {
     video: state.entities.videos[ownProps.match.params.videoId],
-    formType: 'Edit Video'
 }};
 
 const mdp = dispatch => ({
     fetchVideo: videoId => dispatch(fetchVideo(videoId)),
     deleteVideo: videoId => dispatch(deleteVideo(videoId)),
-    action: video => dispatch(updateVideo(video))
+    updateVideo: video => dispatch(updateVideo(video))
 });
 
-export default connect(msp, mdp)(EditVideo);
+export default connect(msp, mdp)(Wrapper);

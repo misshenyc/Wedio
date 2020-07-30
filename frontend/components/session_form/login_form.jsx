@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
                 <h1> Welcome back! {this.state.first_name} {this.state.last_name} </h1>
                 <form onSubmit={this.handleSubmit}>
                 <br />
-                    <p className = 'error-messages'>{this.renderErrors()}</p>
+                    <div className = 'error-messages'>{this.renderErrors()}</div>
                     <br />
                     <div className="form">
                         <br />

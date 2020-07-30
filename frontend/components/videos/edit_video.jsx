@@ -9,13 +9,12 @@ class EditVideo extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        this.props.fetchVideo(this.props.match.params.videoId);
-    }
+
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.action(this.state);
+        // debugger
+        this.props.updateVideo(this.state);
     }
 
     update(field) {
@@ -23,33 +22,37 @@ class EditVideo extends React.Component {
     }
 
     render() {
-        const {video} = this.props
-        if (!video) return null;
+        // debugger;
         return (
             <div className = 'edit-video'>
-                <h3>{this.props.formType}</h3>
+                <h3>Edit Video Details</h3>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
+                    <div className = 'edit-video-title'>
                         Title
                         <br/>
                         <input
                             type='text'
                             value={this.state.title}
                             onChange={this.update('title')}
+                            placeholder = 'Add a title that describes your video'
                         />
-                    </label>
+                    </div>
                     <br />
-                    <label>
+                    <div className = 'edit-video-description'>
                         Description
                         <br />
-                        <textarea
+                        <input
+                            type = 'text'
                             value={this.state.description}
                             onChange={this.update('description')}
+                            placeholder = 'Tell viewers about your video'
                         />
-                    </label>
+                    </div>
                     <br />
-                    <button>{this.props.formType}</button>
+                    <button>Save</button>
+                    <br />
                 </form>
+                    <button onClick = {()=>this.props.deleteVideo(this.props.video.id)}>Delete</button>
             </div>
         );
     }
