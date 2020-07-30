@@ -9,6 +9,7 @@ import VideoShowContainer from './videos/video_show_container';
 import EditVideoContainer from './videos/edit_video_container';
 import CreateVideoContainer from './videos/create_video_container'
 import SideBar from './sidebar/sidebar'
+import CurrentUserVideoContainer from './videos/currentuser_video_container'
 
 const App = () => (
     <div>
@@ -25,6 +26,7 @@ const App = () => (
             <ProtectedRoute exact path="/videos/new" component={CreateVideoContainer} />
             <Route exact path="/videos/:videoId" component={VideoShowContainer} />
             <ProtectedRoute path="/videos/:videoId/edit" component={EditVideoContainer} />
+            <ProtectedRoute path="/users/:userId" component={CurrentUserVideoContainer} />
             <AuthRoute exact path="/login" component={LogInFormContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
         </Switch>
