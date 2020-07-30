@@ -9,13 +9,14 @@ class Wrapper extends React.Component {
     }
 
     render(){
-        const {video, updateVideo, deleteVideo} = this.props
+        const {video, updateVideo, deleteVideo, history} = this.props
         if (!video) return null;
         return(
             <EditVideo
                 video = {video}
                 updateVideo = {updateVideo}
                 deleteVideo = {deleteVideo}
+                history = {history}
             />
         )
     }
@@ -23,7 +24,6 @@ class Wrapper extends React.Component {
 
 
 const msp = (state, ownProps) => {
-    // debugger;
     return {
     video: state.entities.videos[ownProps.match.params.videoId],
 }};

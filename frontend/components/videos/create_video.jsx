@@ -3,14 +3,11 @@ import { Redirect } from "react-router-dom";
 
 class CreateVideo extends React.Component {
     constructor(props) {
-        // debugger
         super(props);
-        // debugger
         this.state = this.props.video
     }
 
     handleSubmit(e) {
-        // debugger
         e.preventDefault();
         const formData = new FormData();
         formData.append('video[title]', this.state.title);
@@ -18,18 +15,15 @@ class CreateVideo extends React.Component {
         if (this.state.videoFile) {
             formData.append('video[videoclip]', this.state.videoFile);
         }
-        // debugger
-        this.props.createVideo(formData);
+        this.props.createVideo(formData).then();
     }
 
     update(field) {
-        // debugger
         return e => this.setState({ [field]: e.currentTarget.value });
     }
 
     handleFile(e){
-        // e.preventDefault();
-        // debugger
+
         const file = e.currentTarget.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
@@ -41,11 +35,9 @@ class CreateVideo extends React.Component {
     }
 
     render() {
-        // debugger
-        console.log(this.props.video);
-        // if (this.props.video.created) {
-        //     <Redirect to ='/'></Redirect>
-        // }
+        if (this.props.created) {
+            return <Redirect to ='/users/video'></Redirect>
+        }
         const preview = this.state.videoUrl ? <video src = {this.state.videoUrl} control= 'true'/> : null;
         return (
             <div className='create-video'>

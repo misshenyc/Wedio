@@ -180,7 +180,7 @@ var demoLogin = function demoLogin() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo */
+/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -188,6 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_VIDEOS", function() { return RECEIVE_ALL_VIDEOS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_VIDEO", function() { return RECEIVE_VIDEO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_VIDEO", function() { return REMOVE_VIDEO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATED_VIDEO", function() { return CREATED_VIDEO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchVideos", function() { return fetchVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchVideo", function() { return fetchVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
@@ -198,6 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_ALL_VIDEOS = 'RECEIVE_ALL_VIDEOS';
 var RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 var REMOVE_VIDEO = 'REMOVE_VIDEO';
+var CREATED_VIDEO = 'CREATED_VIDEO';
 
 var receiveAllVideos = function receiveAllVideos(videos) {
   return {
@@ -213,6 +215,13 @@ var receiveVideo = function receiveVideo(video) {
   };
 };
 
+var createdVideo = function createdVideo(video) {
+  return {
+    type: CREATED_VIDEO,
+    video: video
+  };
+};
+
 var removeVideo = function removeVideo(video) {
   return {
     type: REMOVE_VIDEO,
@@ -223,14 +232,12 @@ var removeVideo = function removeVideo(video) {
 var fetchVideos = function fetchVideos() {
   return function (dispatch) {
     _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchVideos"]().then(function (videos) {
-      // debugger
       dispatch(receiveAllVideos(videos));
     });
   };
 };
 var fetchVideo = function fetchVideo(videoId) {
   return function (dispatch) {
-    // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchVideo"](videoId).then(function (video) {
       return dispatch(receiveVideo(video));
     });
@@ -238,9 +245,8 @@ var fetchVideo = function fetchVideo(videoId) {
 };
 var createVideo = function createVideo(video) {
   return function (dispatch) {
-    // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["createVideo"](video).then(function (video) {
-      return dispatch(receiveVideo(video));
+      return dispatch(createdVideo(video));
     });
   };
 };
@@ -939,9 +945,7 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, CreateVideo);
 
-    // debugger
-    _this = _super.call(this, props); // debugger
-
+    _this = _super.call(this, props);
     _this.state = _this.props.video;
     return _this;
   }
@@ -949,7 +953,6 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
   _createClass(CreateVideo, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      // debugger
       e.preventDefault();
       var formData = new FormData();
       formData.append('video[title]', this.state.title);
@@ -957,17 +960,15 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
 
       if (this.state.videoFile) {
         formData.append('video[videoclip]', this.state.videoFile);
-      } // debugger
+      }
 
-
-      this.props.createVideo(formData);
+      this.props.createVideo(formData).then();
     }
   }, {
     key: "update",
     value: function update(field) {
       var _this2 = this;
 
-      // debugger
       return function (e) {
         return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
       };
@@ -977,8 +978,6 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
     value: function handleFile(e) {
       var _this3 = this;
 
-      // e.preventDefault();
-      // debugger
       var file = e.currentTarget.files[0];
       var fileReader = new FileReader();
 
@@ -996,10 +995,11 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
-      console.log(this.props.video); // if (this.props.video.created) {
-      //     <Redirect to ='/'></Redirect>
-      // }
+      if (this.props.created) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/users/video"
+        });
+      }
 
       var preview = this.state.videoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
         src: this.state.videoUrl,
@@ -1050,9 +1050,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state) {
-  // debugger
+var msp = function msp(state, ownProps) {
+  debugger;
   return {
+    created: state.entities.videos.created,
     video: {
       title: '',
       description: '',
@@ -1063,7 +1064,6 @@ var msp = function msp(state) {
 };
 
 var mdp = function mdp(dispatch) {
-  // debugger
   return {
     createVideo: function createVideo(video) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_3__["createVideo"])(video));
@@ -1135,8 +1135,7 @@ var CurrentUserVideo = /*#__PURE__*/function (_React$Component) {
 
       var currentuserVideos = this.props.videos.filter(function (video) {
         return video.creator_id === _this.props.user.id;
-      }); // debugger
-
+      });
       var videoLis = currentuserVideos.map(function (video) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: video.id,
@@ -1153,8 +1152,7 @@ var CurrentUserVideo = /*#__PURE__*/function (_React$Component) {
         }, video.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "index-video-creator"
         }, video.creator_id)));
-      }); // debugger;
-
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "index-video"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1189,7 +1187,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
   return {
     videos: Object.values(state.entities.videos),
     user: Object.values(state.entities.users)[0]
@@ -1256,8 +1253,8 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, EditVideo);
 
     _this = _super.call(this, props);
-    _this.state = _this.props.video; // debugger;
-
+    _this.state = _this.props.video;
+    ;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -1265,25 +1262,32 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
   _createClass(EditVideo, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault(); // debugger
+      var _this2 = this;
 
-      this.props.updateVideo(this.state);
+      e.preventDefault();
+      console.log(this);
+      debugger;
+      this.props.updateVideo(this.state).then(function (banana) {
+        console.log(_this2);
+        debugger;
+        return _this2.props.history.push('/users/video');
+      });
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        return _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
-      // debugger;
+      ;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-video"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Edit Video Details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -1304,7 +1308,7 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
         placeholder: "Tell viewers about your video"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this3.props.deleteVideo(_this3.props.video.id);
+          return _this4.props.deleteVideo(_this4.props.video.id);
         }
       }, "Delete"));
     }
@@ -1380,12 +1384,14 @@ var Wrapper = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           video = _this$props.video,
           updateVideo = _this$props.updateVideo,
-          deleteVideo = _this$props.deleteVideo;
+          deleteVideo = _this$props.deleteVideo,
+          history = _this$props.history;
       if (!video) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_edit_video__WEBPACK_IMPORTED_MODULE_2__["default"], {
         video: video,
         updateVideo: updateVideo,
-        deleteVideo: deleteVideo
+        deleteVideo: deleteVideo,
+        history: history
       });
     }
   }]);
@@ -1394,7 +1400,6 @@ var Wrapper = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var msp = function msp(state, ownProps) {
-  // debugger;
   return {
     video: state.entities.videos[ownProps.match.params.videoId]
   };
@@ -1474,6 +1479,7 @@ var VideoIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      // debugger
       var videoLis = this.props.videos.map(function (video) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: video.id,
@@ -1490,8 +1496,7 @@ var VideoIndex = /*#__PURE__*/function (_React$Component) {
         }, video.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "index-video-creator"
         }, video.creator_id)));
-      }); // debugger;
-
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "index-video"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1639,7 +1644,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
-  // debugger
   return {
     video: state.entities.videos[ownProps.match.params.videoId]
   };
@@ -1852,10 +1856,15 @@ var VideosReducer = function VideosReducer() {
 
   switch (action.type) {
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_VIDEOS"]:
-      return Object.assign({}, state, action.videos);
+      return action.videos;
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEO"]:
-      return Object.assign({}, state, _defineProperty({}, action.video.id, action.video));
+      return _defineProperty({}, action.video.id, action.video);
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["CREATED_VIDEO"]:
+      return {
+        'created': true
+      };
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_VIDEO"]:
       var nextState = Object.assign({}, state);
@@ -2027,7 +2036,7 @@ var fetchVideo = function fetchVideo(videoId) {
   });
 };
 var createVideo = function createVideo(video) {
-  // debugger;
+  ;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/",

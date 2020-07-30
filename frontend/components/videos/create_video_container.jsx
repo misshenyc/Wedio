@@ -4,19 +4,20 @@ import CreateVideo from './create_video';
 import { createVideo } from '../../actions/video_actions';
 
 
-const msp = state => {
-    // debugger
+const msp = (state, ownProps ) => {
+    debugger
     return {
-    video: {
-        title: '',
-        description: '',
-        videoFile: null,
-        videoUrl: null,
-    },
-}};
+        created: state.entities.videos.created,
+        video: {
+            title: '',
+            description: '',
+            videoFile: null,
+            videoUrl: null,
+        },
+    };
+};
 
 const mdp = dispatch => {
-    // debugger
     return { createVideo: video => dispatch(createVideo(video))}
 };
 

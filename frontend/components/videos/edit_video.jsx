@@ -5,7 +5,7 @@ class EditVideo extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.video;
-        // debugger;
+        ;
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -13,8 +13,12 @@ class EditVideo extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // debugger
-        this.props.updateVideo(this.state);
+        console.log(this);
+        debugger;
+        this.props.updateVideo(this.state).then((banana)=> {
+            console.log(this);
+            debugger;
+            return this.props.history.push('/users/video')});
     }
 
     update(field) {
@@ -22,7 +26,7 @@ class EditVideo extends React.Component {
     }
 
     render() {
-        // debugger;
+        ;
         return (
             <div className = 'edit-video'>
                 <h3>Edit Video Details</h3>

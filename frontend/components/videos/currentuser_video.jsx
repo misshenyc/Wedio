@@ -8,7 +8,7 @@ class CurrentUserVideo extends React.Component {
 
     render() {
         const currentuserVideos = this.props.videos.filter(video => video.creator_id === this.props.user.id)
-        // debugger
+        
         const videoLis = currentuserVideos.map(video => {
             return (<li key = {video.id} className = 'index-video-container'>
                 <video controls className = 'index-video-clip'>
@@ -21,7 +21,7 @@ class CurrentUserVideo extends React.Component {
                 </Link>
             </li>
         )})
-        // debugger;
+        ;
         return (
             <div className = 'index-video'>
                 <span className='recommended-text'> Your Videos </span>
