@@ -22,7 +22,15 @@
     align-items: center;
 }
 
+.sidebar-links {
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+    align-items: center;
+}
+
 .home:hover, .library:hover, .upload:hover, .linkedin:hover, .github:hover  {
     background-color: #eeeeee;
     cursor: pointer;
 }
+
