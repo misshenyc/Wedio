@@ -1,3 +1,15 @@
 .video-show{
-    margin:150px;
+    margin-left:100px;
+    margin-top: 24px;
+}
+
+.show-video-clip{
+    width: 853px;
+    height: 480px;
+}
+
+.show-video-title{
+    width: 853px;
+    height: 108px;
+    padding: 20px, 0, 8px
 }

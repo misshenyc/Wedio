@@ -12,11 +12,12 @@ class VideoShow extends React.Component {
         if (!video) return null;
         return (
             <div className = 'video-show'>
-                <video width='400' controls>
+                <video className = 'show-video-clip' controls>
                     <source src={video.clipUrl}></source>
                 </video>
-                <h1>{video.title}</h1>
-                <p>{video.description}</p>
+                <br/>
+                <span className = 'show-video-title'>{video.title}</span>
+                <span className = 'show-video-description'>{video.description}</span>
             </div>
         );
     }
