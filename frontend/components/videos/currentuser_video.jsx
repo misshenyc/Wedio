@@ -33,6 +33,5 @@ class CurrentUserVideo extends React.Component {
     }
 }
 
-// TODO: Link to users/userid 
 
 export default CurrentUserVideo;

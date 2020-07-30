@@ -28,6 +28,7 @@ const removeVideo = video => {
 export const fetchVideos = () => dispatch => {
     VideoAPIUtil.fetchVideos()
         .then(videos => {
+            // debugger
             dispatch(receiveAllVideos(videos))
         })    
 }
@@ -39,7 +40,7 @@ export const fetchVideo = videoId => dispatch => {
 }
 
 export const createVideo = video => dispatch => {
-    debugger
+    // debugger
     return VideoAPIUtil.createVideo(video)
         .then(video => dispatch(receiveVideo(video)))    
 }

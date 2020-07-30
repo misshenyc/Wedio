@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 
 class CreateVideo extends React.Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class CreateVideo extends React.Component {
         const formData = new FormData();
         formData.append('video[title]', this.state.title);
         formData.append('video[description]', this.state.description);
-        formData.append('video[videoclip]', this.state.videoFile);
+        if (this.state.videoFile) {
+            formData.append('video[videoclip]', this.state.videoFile);
+        }
         // debugger
         this.props.createVideo(formData);
     }
@@ -27,15 +30,26 @@ class CreateVideo extends React.Component {
     handleFile(e){
         // e.preventDefault();
         // debugger
-        this.setState({videoFile: e.currentTarget.files[0]})
+        const file = e.currentTarget.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            this.setState({videoFile: file, videoUrl: fileReader.result})
+        }
+        if(file) {
+            fileReader.readAsDataURL(file);
+        }
     }
 
     render() {
         // debugger
-        console.log(this.state);
+        console.log(this.props.video);
+        // if (this.props.video.created) {
+        //     <Redirect to ='/'></Redirect>
+        // }
+        const preview = this.state.videoUrl ? <video src = {this.state.videoUrl} control= 'true'/> : null;
         return (
             <div className='create-video'>
-                <h3>{this.props.formType}</h3>
+                <h3>Create Video</h3>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <label>
                         Title
@@ -58,7 +72,10 @@ class CreateVideo extends React.Component {
                     <br />
                     <input type="file"
                         onChange={this.handleFile.bind(this)} />
-                    <button>{this.props.formType}</button>
+                    <br/>
+                    <h4> Video Preview </h4>
+                    {preview}
+                    <button type = 'submit'>Create Video</button>
                 </form>
             </div>
         );

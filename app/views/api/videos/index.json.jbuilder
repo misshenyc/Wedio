@@ -6,8 +6,5 @@
     end
 end
 
-# TODO:
-# json.creator do
-#     json.partial! '/api/users/user', user: @video.creator
-# end
+
 

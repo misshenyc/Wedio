@@ -46,6 +46,4 @@ const SideBar = () => {
 };
 
 
-//TODO: add users/video to display all the videos uploaded by one user
-
 export default SideBar;

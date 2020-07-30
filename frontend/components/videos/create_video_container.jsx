@@ -11,8 +11,8 @@ const msp = state => {
         title: '',
         description: '',
         videoFile: null,
+        videoUrl: null,
     },
-    formType: 'Create Video'
 }};
 
 const mdp = dispatch => {

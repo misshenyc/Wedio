@@ -31,6 +31,4 @@ class VideoIndex extends React.Component {
     }
 }
 
-// TODO: Link to users/userid 
-
 export default VideoIndex;
