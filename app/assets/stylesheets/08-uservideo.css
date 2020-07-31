@@ -1,0 +1,102 @@
+.user-video {
+    margin-left: 75px;
+}
+
+/* channel-banner  */
+.channel-banner{
+    flex-basis: 16vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background: url('https://i.pinimg.com/originals/ae/de/69/aede69e6ceadc5e984d9172ec7e95d8a.png') no-repeat center 50%;
+    background-size: cover;
+    padding: 1.6rem;
+    height: 192px;
+}
+
+/* channel-details */
+
+.channel-info{
+    background-color: #f9f9f9;
+    padding: 16px 107px 4px;
+    height: 102px;
+    display: flex;
+    align-items: center;
+}
+
+#profile {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.channel-title {
+    flex: 1 1 auto;
+    margin: 0 2rem;
+    font-size: 24px;
+}
+
+.channel-title i {
+    font-size: 14px;
+    color: #6e6e6e;
+}
+
+.channel-subscribers {
+    color: #606060;
+    font-size: 14px;
+    height: 16px;
+}
+
+.channel-subscribe {
+    display: flex;
+    height: 40px;
+}
+
+.subscribe-button {
+    width: 80px;
+    background-color: #eee;
+    margin: 2px 4px;
+    padding: 10px 16px;
+    color: #606060;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.notifi-button {
+    height: 24px;
+    width: 24px;
+    padding: 8px;
+    color: #606060;
+}
+
+/* nav-bar */
+.channel-nav {
+    background-color: #fafafa;
+    padding-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow-x: auto;
+    font-size: 14px; 
+    font-weight: bolder;
+}
+
+.channel-nav ul {
+    display: flex;
+}
+
+.nav-item a {
+    display: inline-block;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 3.2rem;
+}
+
+.nav-item a.current {
+    border-bottom: 0.3rem solid #606060;
+}
+
+.nav-item a:hover {
+    color: #606060;
+}

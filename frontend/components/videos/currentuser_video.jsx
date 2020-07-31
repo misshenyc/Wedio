@@ -23,8 +23,49 @@ class CurrentUserVideo extends React.Component {
         )})
         ;
         return (
-            <div className = 'index-video'>
-                <span className='recommended-text'> Your Videos </span>
+            <div className = 'user-video'>
+
+                <section className = 'channel-banner'/>
+
+                <section className = 'channel-info'>
+                    <img id='profile' src={window.profile} />
+                    <div className='channel-title'>
+                        <h1>Earth Explorer <i className="fas fa-check-circle fa sm" ></i></h1> 
+                        <div className="channel-subscribers">1,234,567 subscribers</div>        
+                    </div>  
+                    <div className="channel-subscribe">
+                        <button className="subscribe-button">SUBSCRIBED</button>
+                        <button className="notifi-button" aria-label="Enable Notifications"><i className="fas fa-bell" aria-hidden="true"></i></button>
+                    </div>        
+                </section>
+
+                <nav class="channel-nav">
+                    <div class="container">
+                        <ul>
+                            <li class="nav-item">
+                                <a href="#" class="current">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Videos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Playlists</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Community</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">Channels</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+
+
                 <div className = 'index-video-content'>
                     {videoLis}
                 </div>
