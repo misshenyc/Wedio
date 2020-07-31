@@ -1,5 +1,5 @@
 import React from 'react';
-import { closeModal } from '../../actions/modal_actions';
+import { closeCreateModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import CreateVideoContainer from '../videos/create_video_container'
 // import { ProtectedRoute } from '../../util/route_util';
@@ -8,21 +8,18 @@ function Modal({ modal, closeModal }) {
     if (!modal) {
         return null;
     }
-    let component;
     switch (modal) {
         case 'create':
-            component = <CreateVideoContainer />
-            break;
+            return (
+            <div className="modal-background" onClick={closeModal}>
+                <div className="modal-child" onClick={e => e.stopPropagation()}>
+                    <i className="fas fa-times" onClick={closeModal}></i>
+                    <CreateVideoContainer />
+                </div>
+            </div>);
         default:
             return null;
     }
-    return (
-        <div className="modal-background" onClick={closeModal}>
-            <div className="modal-child" onClick={e => e.stopPropagation()}>
-                {component}
-            </div>
-        </div>
-    );
 }
 
 const msp = state => {
@@ -33,7 +30,7 @@ const msp = state => {
 
 const mdp = dispatch => {
     return {
-        closeModal: () => dispatch(closeModal())
+        closeModal: () => dispatch(closeCreateModal())
     };
 };
 

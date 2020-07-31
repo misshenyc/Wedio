@@ -39,25 +39,25 @@ class CurrentUserVideo extends React.Component {
                     </div>        
                 </section>
 
-                <nav class="channel-nav">
-                    <div class="container">
+                <nav className="channel-nav">
+                    <div className="container">
                         <ul>
-                            <li class="nav-item">
-                                <a href="#" class="current">Home</a>
+                            <li className="nav-item">
+                                <a href="#" className="current">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <a href="#">Videos</a>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <a href="#">Playlists</a>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <a href="#">Community</a>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <a href="#">Channels</a>
                             </li>
-                            <li class="nav-item">
+                            <li className="nav-item">
                                 <a href="#">About</a>
                             </li>
                         </ul>

@@ -8,11 +8,8 @@ class EditVideo extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
-
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this);
         this.props.updateVideo(this.state).then(()=> {
             return this.props.history.push(`/videos/${this.props.video.id}`)});
     }
@@ -22,7 +19,6 @@ class EditVideo extends React.Component {
     }
 
     render() {
-        ;
         return (
             <div className = 'edit-video'>
                 <h3>Edit Video Details</h3>

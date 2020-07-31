@@ -2,16 +2,17 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CreateVideo from './create_video';
 import { createVideo } from '../../actions/video_actions';
+import {closeCreateModal} from '../../actions/modal_actions'
 
 
 const msp = (state, ownProps ) => {
     return {
-        created: state.entities.videos.created,
         video: {
             title: '',
             description: '',
             videoFile: null,
             videoUrl: null,
+            step: 0,
         },
     };
 };
@@ -19,6 +20,7 @@ const msp = (state, ownProps ) => {
 const mdp = dispatch => {
     return { 
         createVideo: video => dispatch(createVideo(video)),
+        closeCreateModal: ()=>dispatch(closeCreateModal()),
     }
 };
 

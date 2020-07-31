@@ -17,3 +17,7 @@ export const closeModal = () => {
 export const openCreateModal = () => dispatch => {
     dispatch(openModal('create'));
 };
+
+export const closeCreateModal=() => dispatch => {
+    dispatch(closeModal());
+}

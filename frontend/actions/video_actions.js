@@ -19,13 +19,6 @@ const receiveVideo = video => {
     }
 }
 
-const createdVideo = video => {
-    return {
-        type: CREATED_VIDEO,
-        video
-    }
-}
-
 const removeVideo = video => {
     return {
         type: REMOVE_VIDEO,
@@ -49,7 +42,7 @@ export const fetchVideo = videoId => dispatch => {
 
 export const createVideo = video => dispatch => {
     return VideoAPIUtil.createVideo(video)
-        .then(video => dispatch(createdVideo(video)))
+        // .then(video => dispatch(receiveVideo(video)))
 }
 
 export const updateVideo = video => dispatch => (
