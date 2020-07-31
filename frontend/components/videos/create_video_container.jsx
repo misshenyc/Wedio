@@ -5,7 +5,6 @@ import { createVideo } from '../../actions/video_actions';
 
 
 const msp = (state, ownProps ) => {
-    debugger
     return {
         created: state.entities.videos.created,
         video: {
@@ -18,7 +17,9 @@ const msp = (state, ownProps ) => {
 };
 
 const mdp = dispatch => {
-    return { createVideo: video => dispatch(createVideo(video))}
+    return { 
+        createVideo: video => dispatch(createVideo(video)),
+    }
 };
 
 export default connect(msp, mdp)(CreateVideo);

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {openCreateModal} from '../../actions/modal_actions';
 
-
-
-const SideBar = () => {
+function SideBar() {
     return (
         <div className = 'sidebar'>
             <div className = 'home'>
@@ -21,11 +20,11 @@ const SideBar = () => {
                 </Link>   
             </div>
             <div className='upload'>
-                <Link to='/videos/new' className='sidebar-links'>
+                <button onClick={() => dispatch(openCreateModal())} className='sidebar-links'>
                     <i className="fas fa-cloud-upload-alt fa-lg"></i>
                     <br />
                     <span> Upload </span>                
-                </Link>            
+                </button>            
             </div>      
             <div className='linkedin'>
                 <a href="https://www.linkedin.com/in/milliehe/" className='sidebar-links'>
@@ -42,8 +41,7 @@ const SideBar = () => {
                 </a>
             </div>    
         </div>
-    )
-};
-
+    );
+}
 
 export default SideBar;
