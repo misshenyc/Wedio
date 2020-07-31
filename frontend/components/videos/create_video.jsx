@@ -15,7 +15,7 @@ class CreateVideo extends React.Component {
         if (this.state.videoFile) {
             formData.append('video[videoclip]', this.state.videoFile);
         }
-        this.props.createVideo(formData).then();
+        this.props.createVideo(formData);
     }
 
     update(field) {

@@ -962,7 +962,7 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
         formData.append('video[videoclip]', this.state.videoFile);
       }
 
-      this.props.createVideo(formData).then();
+      this.props.createVideo(formData);
     }
   }, {
     key: "update",
@@ -1254,7 +1254,6 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = _this.props.video;
-    ;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -1266,11 +1265,8 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
 
       e.preventDefault();
       console.log(this);
-      debugger;
-      this.props.updateVideo(this.state).then(function (banana) {
-        console.log(_this2);
-        debugger;
-        return _this2.props.history.push('/users/video');
+      this.props.updateVideo(this.state).then(function () {
+        return _this2.props.history.push("/videos/".concat(_this2.props.video.id));
       });
     }
   }, {
