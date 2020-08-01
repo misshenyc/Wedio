@@ -13,7 +13,7 @@ function Modal({ modal, closeModal }) {
             return (
             <div className="modal-background" onClick={closeModal}>
                 <div className="modal-child" onClick={e => e.stopPropagation()}>
-                    <i className="fas fa-times" onClick={closeModal}></i>
+                    <i className="fas fa-times fa-lg " onClick={closeModal}></i>
                     <CreateVideoContainer />
                 </div>
             </div>);
