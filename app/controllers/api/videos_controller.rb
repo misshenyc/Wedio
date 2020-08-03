@@ -38,6 +38,30 @@ class Api::VideosController < ApplicationController
         end
     end
 
+    def like
+        like = Like.new(
+            user_id: current_user.id, 
+            likeable_id: params[:id], 
+            likeable_type: 'Video')
+        if like.save!
+            render current_user.videos.find(params[:id])
+        else
+            render json: like.errors.full_messages, status: 422
+        end
+    end
+
+    def unlike
+        like = Like.find_by(
+            user_id: current_user.id, 
+            likeable_id: params[:id], 
+            likeable_type: 'Video')
+        if like.destroy
+            render current_user.videos.find(params[:id])
+        else
+            render json: like.errors.full_messages, status: 422
+        end
+    end
+
     private
 
     def video_params

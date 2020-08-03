@@ -221,7 +221,7 @@ var demoLogin = function demoLogin() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo */
+/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, likeVideo, unlikeVideo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -235,6 +235,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteVideo", function() { return deleteVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeVideo", function() { return likeVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unlikeVideo", function() { return unlikeVideo; });
 /* harmony import */ var _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/video_api_util */ "./frontend/util/video_api_util.js");
 
 var RECEIVE_ALL_VIDEOS = 'RECEIVE_ALL_VIDEOS';
@@ -293,6 +295,22 @@ var deleteVideo = function deleteVideo(videoId) {
   return function (dispatch) {
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteVideo"](videoId).then(function () {
       return dispatch(removeVideo(videoId));
+    });
+  };
+};
+var likeVideo = function likeVideo(videoId) {
+  return function (dispatch) {
+    debugger;
+    return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["likeVideo"](videoId).then(function (video) {
+      return dispatch(receiveVideo(video));
+    });
+  };
+};
+var unlikeVideo = function unlikeVideo(videoId) {
+  return function (dispatch) {
+    debugger;
+    return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["unlikeVideo"](videoId).then(function (video) {
+      return dispatch(receiveVideo(video));
     });
   };
 };
@@ -1787,8 +1805,25 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var video = this.props.video;
+      var _this$props = this.props,
+          video = _this$props.video,
+          likeVideo = _this$props.likeVideo,
+          unlikeVideo = _this$props.unlikeVideo;
       if (!video) return null;
+      var likeText = 'I like this';
+
+      var likeAction = function likeAction() {
+        return likeVideo(video.id);
+      };
+
+      if (video.liked_by_current_user) {
+        likeText = 'Unlike';
+
+        likeAction = function likeAction() {
+          return unlikeVideo(video.id);
+        };
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
@@ -1798,7 +1833,11 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         className: "show-video-title"
       }, video.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "show-video-description"
-      }, video.description));
+      }, video.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "video-likes-count"
+      }, video.likes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: likeAction
+      }, likeText));
     }
   }]);
 
@@ -1832,9 +1871,16 @@ var msp = function msp(state, ownProps) {
 };
 
 var mdp = function mdp(dispatch) {
+  debugger;
   return {
     fetchVideo: function fetchVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["fetchVideo"])(videoId));
+    },
+    likeVideo: function likeVideo(videoId) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["likeVideo"])(videoId));
+    },
+    unlikeVideo: function unlikeVideo(videoId) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["unlikeVideo"])(videoId));
     }
   };
 };
@@ -2242,7 +2288,7 @@ var logout = function logout() {
 /*!*****************************************!*\
   !*** ./frontend/util/video_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo */
+/*! exports provided: fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, likeVideo, unlikeVideo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2252,6 +2298,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteVideo", function() { return deleteVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeVideo", function() { return likeVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unlikeVideo", function() { return unlikeVideo; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
 var fetchVideos = function fetchVideos() {
@@ -2287,6 +2335,20 @@ var deleteVideo = function deleteVideo(videoId) {
   return $.ajax({
     method: 'DELETE',
     url: "/api/videos/".concat(videoId)
+  });
+};
+var likeVideo = function likeVideo(videoId) {
+  debugger;
+  return $.ajax({
+    method: 'POST',
+    url: "/api/videos/".concat(videoId, "/like")
+  });
+};
+var unlikeVideo = function unlikeVideo(videoId) {
+  debugger;
+  return $.ajax({
+    method: 'POST',
+    url: "/api/videos/".concat(videoId, "/unlike")
   });
 };
 

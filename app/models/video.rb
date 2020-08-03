@@ -8,6 +8,9 @@ class Video < ApplicationRecord
 
     has_one_attached :videoclip
 
+    has_many :likes, as: :likeable
+
+
 
 end
 

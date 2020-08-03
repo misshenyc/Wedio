@@ -12,6 +12,7 @@ export const fetchVideo = (videoId) => {
     })
 }
 
+
 export const createVideo = (video) => {
     ;
     return $.ajax({
@@ -36,6 +37,22 @@ export const deleteVideo = (videoId) => {
         method: 'DELETE',
         url: `/api/videos/${videoId}`,
     })
+}
+
+export const likeVideo = (videoId) => {
+    debugger;
+    return $.ajax({
+        method: 'POST',
+        url: `/api/videos/${videoId}/like`,
+    });
+}
+
+export const unlikeVideo = (videoId) => {
+    debugger;
+    return $.ajax({
+        method: 'POST',
+        url: `/api/videos/${videoId}/unlike`,
+    });
 }
 
 

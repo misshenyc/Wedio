@@ -8,8 +8,14 @@ class VideoShow extends React.Component {
     }
 
     render() {
-        const { video } = this.props;
+        const { video, likeVideo, unlikeVideo } = this.props;
         if (!video) return null;
+        let likeText = 'I like this'
+        let likeAction = () => likeVideo(video.id);
+        if (video.liked_by_current_user) {
+            likeText = 'Unlike';
+            likeAction = () => unlikeVideo(video.id);
+        }
         return (
             <div className = 'video-show'>
                 {/* <video className = 'show-video-clip' controls>
@@ -19,6 +25,8 @@ class VideoShow extends React.Component {
                 <br/>
                 <span className = 'show-video-title'>{video.title}</span>
                 <span className = 'show-video-description'>{video.description}</span>
+                <div className = 'video-likes-count'>{video.likes}</div>
+                <button onClick = {likeAction}>{likeText}</button>
             </div>
         );
     }
