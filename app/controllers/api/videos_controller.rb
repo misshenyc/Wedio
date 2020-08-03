@@ -62,6 +62,30 @@ class Api::VideosController < ApplicationController
         end
     end
 
+    def dislike
+        dislike = Dislike.new(
+            user_id: current_user.id, 
+            dislikeable_id: params[:id], 
+            dislikeable_type: 'Video')
+        if dislike.save!
+            render current_user.videos.find(params[:id])
+        else
+            render json: dislike.errors.full_messages, status: 422
+        end
+    end
+
+    def undislike
+        dislike = Dislike.find_by(
+            user_id: current_user.id, 
+            dislikeable_id: params[:id], 
+            dislikeable_type: 'Video')
+        if dislike.destroy
+            render current_user.videos.find(params[:id])
+        else
+            render json: dislike.errors.full_messages, status: 422
+        end
+    end
+
     private
 
     def video_params

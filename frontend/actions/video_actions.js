@@ -56,13 +56,23 @@ export const deleteVideo = videoId => dispatch => (
 );
 
 export const likeVideo = videoId => dispatch => {
-    debugger
+    // debugger
     return VideoAPIUtil.likeVideo(videoId)
         .then(video => dispatch(receiveVideo(video)))
 }
 
 export const unlikeVideo = videoId => dispatch => {
-    debugger
+    // debugger
     return VideoAPIUtil.unlikeVideo(videoId)
+        .then(video => dispatch(receiveVideo(video)))
+}
+
+export const dislikeVideo = videoId => dispatch => {
+    return VideoAPIUtil.dislikeVideo(videoId)
+        .then(video => dispatch(receiveVideo(video)))
+}
+
+export const undislikeVideo = videoId => dispatch => {
+    return VideoAPIUtil.undislikeVideo(videoId)
         .then(video => dispatch(receiveVideo(video)))
 }

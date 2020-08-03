@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       member do 
         post 'like'
         post 'unlike'
+        post 'dislike'
+        post 'undislike'
       end
     end
     # resources :likes, only: [:create]

@@ -10,6 +10,8 @@ class Video < ApplicationRecord
 
     has_many :likes, as: :likeable
 
+    has_many :dislikes, as: :dislikeable
+
 
 
 end

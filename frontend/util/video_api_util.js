@@ -40,7 +40,7 @@ export const deleteVideo = (videoId) => {
 }
 
 export const likeVideo = (videoId) => {
-    debugger;
+    // debugger;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/${videoId}/like`,
@@ -48,10 +48,26 @@ export const likeVideo = (videoId) => {
 }
 
 export const unlikeVideo = (videoId) => {
-    debugger;
+    // debugger;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/${videoId}/unlike`,
+    });
+}
+
+export const dislikeVideo = (videoId) => {
+    // debugger;
+    return $.ajax({
+        method: 'POST',
+        url: `/api/videos/${videoId}/dislike`,
+    });
+}
+
+export const undislikeVideo = (videoId) => {
+    // debugger;
+    return $.ajax({
+        method: 'POST',
+        url: `/api/videos/${videoId}/undislike`,
     });
 }
 
