@@ -1,14 +1,16 @@
-class CommentsController < ApplicationController
+class Api::CommentsController < ApplicationController
 
     before_action :require_logged_in, only: [:create]
 
     def index
         @comments = Comment.all 
+        render :index
     end
 
     def show
         @comment = Comment.find(params[:id])
-        @new_comment = @comment.child_comments.new
+        # @new_comment = @comment.child_comments.new
+        render :show
     end
 
     def new
@@ -20,7 +22,7 @@ class CommentsController < ApplicationController
         if @comment.save
             render :show
         else
-            render json: comment.errors.full_messages, status: 422
+            render json: @comment.errors.full_messages, status: 422
         end
     end
 

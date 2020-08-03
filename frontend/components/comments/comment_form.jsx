@@ -13,15 +13,16 @@ class CommentForm extends React.Component{
 
     navigateToVideoShow(){
         const url =  `/videos/${this.props.match.params.videoId}`
+        // debugger
         this.props.history.push(url);
     }
 
     handleSubmit(e){
         e.preventDefault();
         const videoId = parseInt(this.props.match.params.videoId);
-        const comment = Object.assign({}, this.state, {videoId: videoId});
+        const comment = Object.assign({}, this.state, {video_id: videoId});
         this.props.createComment(comment);
-        this.navigateToVideoShow;
+        this.navigateToVideoShow();
     }
 
     update(field){
@@ -39,7 +40,7 @@ class CommentForm extends React.Component{
                         value = {this.state.body}
                         onChange = {this.update('body')}
                     />
-                    <button> Submit </button>
+                    <button type = 'submit'> Submit </button>
                 </form>
                 <button onClick = {this.navigateToVideoShow}>Cancel</button>
             </div>
@@ -47,4 +48,4 @@ class CommentForm extends React.Component{
     }
 }
 
-export default CommentForm
+export default withRouter(CommentForm)

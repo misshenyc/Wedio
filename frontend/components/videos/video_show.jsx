@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import CommentFormContainer from '../comments/comment_form_container'
 import { CommentLink } from '../../util/link_util';
 import { ProtectedRoute } from '../../util/route_util';
+import CommentIndex from '../comments/comment_index';
 import CommentShow from '../comments/comment_show';
+import CommentIndexContainer from '../comments/comment_index_container'
 import CommentForm from '../comments/comment_form'
 
 class VideoShow extends React.Component {
@@ -30,12 +32,16 @@ class VideoShow extends React.Component {
             dislikeText = 'Undo dislike';
             dislikeAction = () => undislikeVideo(video.id);
         }
+
+        const commentList = (comments = []) => {
+            return comments.map(comment => <CommentShow 
+                comment = {comment}
+                key = {comment.id}
+            />)
+        }
         
         return (
             <div className = 'video-show'>
-                {/* <video className = 'show-video-clip' controls>
-                    <source src={video.clipUrl}></source>
-                </video> */}
                 <video src={video.clipUrl} controls/>
                 <br/>
                 <span className = 'show-video-title'>{video.title}</span>
@@ -63,7 +69,8 @@ class VideoShow extends React.Component {
                 </div> */}
 
                 <div className = 'show-comment'>
-                    <CommentShow/>
+                    <h3> Comments </h3>
+                    {commentList(Object.values(video.comments))}
                 </div>
 
 

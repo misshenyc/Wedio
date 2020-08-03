@@ -13,17 +13,17 @@ const receiveAllVideos = videos => {
     }
 }
 
-const receiveVideo = video => {
+export const receiveVideo = video => {
     return {
         type: RECEIVE_VIDEO,
         video
     }
 }
 
-const removeVideo = video => {
+const removeVideo = videoId => {
     return {
         type: REMOVE_VIDEO,
-        video
+        videoId
     }
 }
 

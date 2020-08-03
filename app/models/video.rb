@@ -12,6 +12,8 @@ class Video < ApplicationRecord
 
     has_many :dislikes, as: :dislikeable
 
+    has_many :comments
+
 
 
 end
