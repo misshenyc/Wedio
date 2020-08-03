@@ -5,6 +5,7 @@ export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'REMOVE_VIDEO';
 export const CREATED_VIDEO = 'CREATED_VIDEO';
 
+
 const receiveAllVideos = videos => {
     return {
         type: RECEIVE_ALL_VIDEOS,
@@ -25,6 +26,7 @@ const removeVideo = video => {
         video
     }
 }
+
 
 
 
@@ -76,3 +78,5 @@ export const undislikeVideo = videoId => dispatch => {
     return VideoAPIUtil.undislikeVideo(videoId)
         .then(video => dispatch(receiveVideo(video)))
 }
+
+

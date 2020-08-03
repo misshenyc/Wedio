@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CommentFormContainer from '../comments/comment_form_container'
+import { CommentLink } from '../../util/link_util';
+import { ProtectedRoute } from '../../util/route_util';
+import CommentShow from '../comments/comment_show';
+import CommentForm from '../comments/comment_form'
 
 class VideoShow extends React.Component {
     
@@ -42,6 +47,16 @@ class VideoShow extends React.Component {
                 <br/>
                 <button onClick = {dislikeAction}>{dislikeText}</button>
                 <div className = 'video-dislikes-count'>{video.dislikes}</div>
+
+                <div className = 'add-comment'>
+                    <CommentForm/>
+                </div>
+
+                <div className = 'show-comment'>
+                    <CommentShow/>
+                </div>
+
+
             </div>
         );
     }

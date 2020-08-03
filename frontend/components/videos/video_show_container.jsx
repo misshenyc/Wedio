@@ -8,8 +8,9 @@ import {
 
 const msp = (state, ownProps) => {
     return {
-    video: state.entities.videos[ownProps.match.params.videoId]
-}};
+        video: state.entities.videos[ownProps.match.params.videoId]
+    }
+};
 
 const mdp = dispatch => {
     // debugger
