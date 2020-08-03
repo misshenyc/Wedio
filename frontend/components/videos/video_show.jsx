@@ -48,9 +48,19 @@ class VideoShow extends React.Component {
                 <button onClick = {dislikeAction}>{dislikeText}</button>
                 <div className = 'video-dislikes-count'>{video.dislikes}</div>
 
-                <div className = 'add-comment'>
+                <CommentLink
+                    component={CommentFormContainer}
+                    to={`/videos/${video.id}/review`}
+                    label="Add a public comment"
+                />
+                <ProtectedRoute
+                    path="/videos/:videoId/review"
+                    component={CommentFormContainer}
+                />
+
+                {/* <div className = 'add-comment'>
                     <CommentForm/>
-                </div>
+                </div> */}
 
                 <div className = 'show-comment'>
                     <CommentShow/>

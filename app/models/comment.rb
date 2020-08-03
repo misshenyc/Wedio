@@ -1,17 +1,14 @@
 class Comment < ApplicationRecord
 
-    include likeable
-
     validates :body, presence: true
 
     after_initialize :ensure_video_id!
 
-    belongs_to :video, inverse_of: :comments
+    belongs_to :video
 
-    belongs_to :commenter
+    belongs_to :commenter,
         foreign_key: :user_id,
-        class_name: :User,
-        inverse_of: :comments
+        class_name: :User
 
     has_many :child_comments,
         foreign_key: :parent_comment_id,

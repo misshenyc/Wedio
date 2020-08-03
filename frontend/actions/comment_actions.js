@@ -1,9 +1,9 @@
 
-export const CREATE_COMMENT = 'CREATE_COMMENT'
+export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 
 const receiveComment = comment => {
     return {
-        type: CREATE_COMMENT,
+        type: RECEIVE_COMMENT,
         comment
     }
 }
