@@ -19,7 +19,8 @@ class VideoShow extends React.Component {
             unlikeVideo, 
             dislikeVideo, 
             undislikeVideo,
-            editComment } = this.props;
+            deleteComment,
+            history } = this.props;
         
         if (!video) return null;
 
@@ -37,13 +38,14 @@ class VideoShow extends React.Component {
             dislikeAction = () => undislikeVideo(video.id);
         }
 
-        const commentList = (comments, editComment) => {
+        const commentList = (comments, deleteComment) => {
             if (!comments) return;
             return Object.values(comments).map(comment => <CommentShow 
                 comment = {comment}
                 key = {comment.id}
-                editComment = {editComment}
+                deleteComment = {deleteComment}
                 videoId = {video.id}
+                history = {history}
             />)
         }
         
@@ -71,7 +73,7 @@ class VideoShow extends React.Component {
                 />
                 <div className = 'show-comment'>
                     <h3> Comments </h3>
-                    {commentList(video.comments, editComment)}
+                    {commentList(video.comments, deleteComment)}
                 </div>
             </div>
         );

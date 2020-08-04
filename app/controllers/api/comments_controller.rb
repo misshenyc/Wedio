@@ -1,21 +1,6 @@
 class Api::CommentsController < ApplicationController
 
-    before_action :require_logged_in, only: [:create, :update]
-
-    # def index
-    #     @comments = Comment.all 
-    #     render :index
-    # end
-
-    # def show
-    #     @comment = Comment.find(params[:id])
-    #     # @new_comment = @comment.child_comments.new
-    #     render :show
-    # end
-
-    # def new
-    #     @comment = Comment.new(video_id: params[video_id])
-    # end
+    before_action :require_logged_in, only: [:create, :update, :delete]
 
     def create
         @comment = current_user.comments.new(comment_params)
@@ -35,6 +20,15 @@ class Api::CommentsController < ApplicationController
         end
     end
 
+
+    def destroy
+        @comment = current_user.comments.find(params[:id])
+        if @comment.destroy
+            render :show
+        else
+            render json: @comment.errors.full_messages, status: 422
+        end
+    end
 
     # def like
     #     like = Like.new(

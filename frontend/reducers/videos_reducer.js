@@ -3,6 +3,7 @@ import {
     RECEIVE_VIDEO, 
     REMOVE_VIDEO,
     RECEIVE_COMMENT,
+    REMOVE_COMMENT,
     RECEIVE_LIKE,
     RECEIVE_DISLIKE,
     RECEIVE_UNDISLIKE,
@@ -19,12 +20,12 @@ const VideosReducer = (state = {}, action) => {
         case RECEIVE_VIDEO:
             return { [action.video.id]: action.video }
         case REMOVE_VIDEO:
-            let nextState = Object.assign({}, state);
-            delete nextState[action.videoId]
-            return nextState;
+            let state0 = Object.assign({}, state);
+            delete state0[action.videoId]
+            return state0;
         case RECEIVE_COMMENT:
-            let newState = merge({},state);
-            let video = newState[action.comment.video_id];
+            let state5 = merge({},state);
+            let video = state5[action.comment.video_id];
             if (video.comments) {
                 video.comments[action.comment.id] = action.comment;
             } else {
@@ -32,7 +33,11 @@ const VideosReducer = (state = {}, action) => {
                     [action.comment.id] : action.comment
                 };
             }
-            return newState;
+            return state5;
+        case REMOVE_COMMENT:
+            let state6 = Object.assign({}, state);
+            delete state6[action.commentId];
+            return state6;
         case RECEIVE_LIKE:
             let state1 = merge({}, state);
             state1[action.video.id]['liked_by_current_user'] = true;

@@ -4,7 +4,7 @@ import {
     fetchVideo, 
     likeVideo, unlikeVideo,
     dislikeVideo, undislikeVideo,
-    editComment,
+    deleteComment,
 } from '../../actions/video_actions';
 
 const msp = (state, ownProps) => {
@@ -21,7 +21,7 @@ const mdp = dispatch => {
         unlikeVideo: videoId => dispatch(unlikeVideo(videoId)),
         dislikeVideo: videoId => dispatch(dislikeVideo(videoId)),
         undislikeVideo: videoId => dispatch(undislikeVideo(videoId)),
-        editComment: comment => dispatch(editComment(comment)),
+        deleteComment: commentId => dispatch(deleteComment(commentId)),
     }
 };
 

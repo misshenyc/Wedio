@@ -11,16 +11,14 @@ Rails.application.routes.draw do
         post 'undislike'
       end
     end
-    resources :comments, only: [:create, :index, :show, :update, :destroy] do
-      member do 
-        post 'like'
-        post 'unlike'
-        post 'dislike'
-        post 'undislike'
-      end
+    resources :comments, only: [ :show, :create, :update, :destroy] do
+      # member do 
+      #   post 'like'
+      #   post 'unlike'
+      #   post 'dislike'
+      #   post 'undislike'
+      # end
     end
-    # resources :likes, only: [:create]
-    # delete '/likes', to: 'likes#destroy'
   end
   
 

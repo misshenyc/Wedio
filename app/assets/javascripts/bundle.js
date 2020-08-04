@@ -221,7 +221,7 @@ var demoLogin = function demoLogin() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, createComment, editComment */
+/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, REMOVE_COMMENT, createComment, editComment, deleteComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -245,8 +245,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dislikeVideo", function() { return dislikeVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undislikeVideo", function() { return undislikeVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_COMMENT", function() { return REMOVE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editComment", function() { return editComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
 /* harmony import */ var _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/video_api_util */ "./frontend/util/video_api_util.js");
 /* harmony import */ var _util_comment_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/comment_api_util */ "./frontend/util/comment_api_util.js");
 
@@ -377,11 +379,19 @@ var undislikeVideo = function undislikeVideo(videoId) {
 
 
 var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+var REMOVE_COMMENT = 'REMOVE_COMMENT';
 
 var receiveComment = function receiveComment(comment) {
   return {
     type: RECEIVE_COMMENT,
     comment: comment
+  };
+};
+
+var removeComment = function removeComment(commentId) {
+  return {
+    type: REMOVE_COMMENT,
+    commentId: commentId
   };
 };
 
@@ -396,6 +406,13 @@ var editComment = function editComment(comment) {
   return function (dispatch) {
     return _util_comment_api_util__WEBPACK_IMPORTED_MODULE_1__["updateComment"](comment).then(function (comment) {
       return dispatch(receiveComment(comment));
+    });
+  };
+};
+var deleteComment = function deleteComment(commentId) {
+  return function (dispatch) {
+    return _util_comment_api_util__WEBPACK_IMPORTED_MODULE_1__["deleteComment"](commentId).then(function (commentId) {
+      return dispatch(removeComment(commentId));
     });
   };
 };
@@ -780,12 +797,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var CommentShow = function CommentShow(_ref) {
-  var comment = _ref.comment,
-      videoId = _ref.videoId,
-      editComment = _ref.editComment;
+var CommentShow = function CommentShow(props) {
+  var comment = props.comment,
+      videoId = props.videoId,
+      deleteComment = props.deleteComment;
   var body = comment.body,
       user_id = comment.user_id;
+
+  var refreshPage = function refreshPage() {
+    window.location.reload(false);
+  }; // debugger
+
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body, " by ", user_id, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_1__["default"], {
     component: _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__["default"],
     to: "/videos/".concat(videoId, "/comment/").concat(comment.id, "/edit"),
@@ -793,7 +816,14 @@ var CommentShow = function CommentShow(_ref) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
     path: "/videos/:videoId/comment/:commentId/edit",
     component: _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return deleteComment(comment.id) // .then(() => props.history.push(`/videos/${videoId}`))
+      .then(function () {
+        return refreshPage();
+      });
+    }
+  }, " Delete "));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CommentShow);
@@ -2229,7 +2259,8 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
           unlikeVideo = _this$props.unlikeVideo,
           dislikeVideo = _this$props.dislikeVideo,
           undislikeVideo = _this$props.undislikeVideo,
-          editComment = _this$props.editComment;
+          deleteComment = _this$props.deleteComment,
+          history = _this$props.history;
       if (!video) return null;
       var likeText = 'I like this';
 
@@ -2259,14 +2290,15 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         };
       }
 
-      var commentList = function commentList(comments, editComment) {
+      var commentList = function commentList(comments, deleteComment) {
         if (!comments) return;
         return Object.values(comments).map(function (comment) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_show__WEBPACK_IMPORTED_MODULE_5__["default"], {
             comment: comment,
             key: comment.id,
-            editComment: editComment,
-            videoId: video.id
+            deleteComment: deleteComment,
+            videoId: video.id,
+            history: history
           });
         });
       };
@@ -2298,7 +2330,7 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "show-comment"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), commentList(video.comments, editComment)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), commentList(video.comments, deleteComment)));
     }
   }]);
 
@@ -2348,8 +2380,8 @@ var mdp = function mdp(dispatch) {
     undislikeVideo: function undislikeVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["undislikeVideo"])(videoId));
     },
-    editComment: function editComment(comment) {
-      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["editComment"])(comment));
+    deleteComment: function deleteComment(commentId) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["deleteComment"])(commentId));
     }
   };
 };
@@ -2614,13 +2646,13 @@ var VideosReducer = function VideosReducer() {
       return _defineProperty({}, action.video.id, action.video);
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_VIDEO"]:
-      var nextState = Object.assign({}, state);
-      delete nextState[action.videoId];
-      return nextState;
+      var state0 = Object.assign({}, state);
+      delete state0[action.videoId];
+      return state0;
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_COMMENT"]:
-      var newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
-      var video = newState[action.comment.video_id];
+      var state5 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      var video = state5[action.comment.video_id];
 
       if (video.comments) {
         video.comments[action.comment.id] = action.comment;
@@ -2628,7 +2660,12 @@ var VideosReducer = function VideosReducer() {
         video.comments = _defineProperty({}, action.comment.id, action.comment);
       }
 
-      return newState;
+      return state5;
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_COMMENT"]:
+      var state6 = Object.assign({}, state);
+      delete state6[action.commentId];
+      return state6;
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKE"]:
       var state1 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
