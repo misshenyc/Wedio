@@ -221,7 +221,7 @@ var demoLogin = function demoLogin() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, createComment */
+/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, createComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -236,6 +236,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteVideo", function() { return deleteVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKE", function() { return RECEIVE_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_UNLIKE", function() { return RECEIVE_UNLIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_DISLIKE", function() { return RECEIVE_DISLIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_UNDISLIKE", function() { return RECEIVE_UNDISLIKE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeVideo", function() { return likeVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unlikeVideo", function() { return unlikeVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dislikeVideo", function() { return dislikeVideo; });
@@ -303,37 +307,74 @@ var deleteVideo = function deleteVideo(videoId) {
       return dispatch(removeVideo(videoId));
     });
   };
+}; // LIKE & DISLIKES
+
+var RECEIVE_LIKE = 'RECEIVE_LIKE';
+var RECEIVE_UNLIKE = 'RECEIVE_UNLIKE';
+var RECEIVE_DISLIKE = 'RECEIVE_DISLIKE';
+var RECEIVE_UNDISLIKE = 'RECEIVE_UNDISLIKE';
+
+var receiveLike = function receiveLike(video) {
+  return {
+    type: RECEIVE_LIKE,
+    video: video
+  };
 };
+
 var likeVideo = function likeVideo(videoId) {
   return function (dispatch) {
     // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["likeVideo"](videoId).then(function (video) {
-      return dispatch(receiveVideo(video));
+      return dispatch(receiveLike(video));
     });
   };
 };
+
+var receiveUnlike = function receiveUnlike(video) {
+  return {
+    type: RECEIVE_UNLIKE,
+    video: video
+  };
+};
+
 var unlikeVideo = function unlikeVideo(videoId) {
   return function (dispatch) {
     // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["unlikeVideo"](videoId).then(function (video) {
-      return dispatch(receiveVideo(video));
+      return dispatch(receiveUnlike(video));
     });
   };
 };
+
+var receivedislike = function receivedislike(video) {
+  return {
+    type: RECEIVE_DISLIKE,
+    video: video
+  };
+};
+
 var dislikeVideo = function dislikeVideo(videoId) {
   return function (dispatch) {
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["dislikeVideo"](videoId).then(function (video) {
-      return dispatch(receiveVideo(video));
+      return dispatch(receivedislike(video));
     });
   };
 };
+
+var receiveundislike = function receiveundislike(video) {
+  return {
+    type: RECEIVE_UNDISLIKE,
+    video: video
+  };
+};
+
 var undislikeVideo = function undislikeVideo(videoId) {
   return function (dispatch) {
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["undislikeVideo"](videoId).then(function (video) {
-      return dispatch(receiveVideo(video));
+      return dispatch(receiveundislike(video));
     });
   };
-}; // comments
+}; //COMMENTS
 
 
 var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
@@ -2416,6 +2457,30 @@ var VideosReducer = function VideosReducer() {
       }
 
       return newState;
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_LIKE"]:
+      var state1 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      state1[action.video.id]['liked_by_current_user'] = true;
+      state1[action.video.id].likes = action.video.likes;
+      return state1;
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_UNLIKE"]:
+      var state2 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      state2[action.video.id]['liked_by_current_user'] = false;
+      state2[action.video.id].likes = action.video.likes;
+      return state2;
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_DISLIKE"]:
+      var state3 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      state3[action.video.id]['disliked_by_current_user'] = true;
+      state3[action.video.id].dislikes = action.video.dislikes;
+      return state3;
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_UNDISLIKE"]:
+      var state4 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      state4[action.video.id]['disliked_by_current_user'] = false;
+      state4[action.video.id].dislikes = action.video.dislikes;
+      return state4;
 
     default:
       return state;

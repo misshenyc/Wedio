@@ -5,6 +5,7 @@ export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'REMOVE_VIDEO';
 export const CREATED_VIDEO = 'CREATED_VIDEO';
 
+
 const receiveAllVideos = videos => {
     return {
         type: RECEIVE_ALL_VIDEOS,
@@ -53,30 +54,66 @@ export const deleteVideo = videoId => dispatch => (
         .then(() => dispatch(removeVideo(videoId)))
 );
 
+
+// LIKE & DISLIKES
+export const RECEIVE_LIKE = 'RECEIVE_LIKE';
+export const RECEIVE_UNLIKE = 'RECEIVE_UNLIKE';
+export const RECEIVE_DISLIKE = 'RECEIVE_DISLIKE';
+export const RECEIVE_UNDISLIKE = 'RECEIVE_UNDISLIKE';
+
+const receiveLike = (video) => {
+    return {
+        type: RECEIVE_LIKE,
+        video,
+    }
+}
 export const likeVideo = videoId => dispatch => {
     // debugger
     return VideoAPIUtil.likeVideo(videoId)
-        .then(video => dispatch(receiveVideo(video)))
+        .then((video) => dispatch(receiveLike(video)))
+}
+
+const receiveUnlike = (video) => {
+    return {
+        type: RECEIVE_UNLIKE,
+        video,
+    }
 }
 
 export const unlikeVideo = videoId => dispatch => {
     // debugger
     return VideoAPIUtil.unlikeVideo(videoId)
-        .then(video => dispatch(receiveVideo(video)))
+        .then((video) => dispatch(receiveUnlike(video)))
+}
+
+const receivedislike = (video) => {
+    return {
+        type: RECEIVE_DISLIKE,
+        video,
+    }
 }
 
 export const dislikeVideo = videoId => dispatch => {
     return VideoAPIUtil.dislikeVideo(videoId)
-        .then(video => dispatch(receiveVideo(video)))
+        .then((video) => dispatch(receivedislike(video)))
+}
+
+const receiveundislike = (video) => {
+    return {
+        type: RECEIVE_UNDISLIKE,
+        video,
+    }
 }
 
 export const undislikeVideo = videoId => dispatch => {
     return VideoAPIUtil.undislikeVideo(videoId)
-        .then(video => dispatch(receiveVideo(video)))
+        .then((video) => dispatch(receiveundislike(video)))
 }
 
 
-// comments
+//COMMENTS
+
+
 import * as CommentAPIUtil from '../util/comment_api_util';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 
