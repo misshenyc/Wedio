@@ -4,7 +4,7 @@ import {
     REMOVE_VIDEO,
     RECEIVE_COMMENT,
 } from '../actions/video_actions'
-
+import merge from 'lodash/merge';
 
 const VideosReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -19,11 +19,16 @@ const VideosReducer = (state = {}, action) => {
             delete nextState[action.videoId]
             return nextState;
         case RECEIVE_COMMENT:
-            let newState = Object.assign({}, state);
-            // debugger;
-            newState[action.comment.video_id].comments[action.comment.id] = action.comment;
-            // debugger;
-            return newState
+            let newState = merge({},state);
+            let video = newState[action.comment.video_id];
+            if (video.comments) {
+                video.comments[action.comment.id] = action.comment;
+            } else {
+                video.comments = {
+                    [action.comment.id] : action.comment
+                };
+            }
+            return newState;
         default:
             return state;
     }
