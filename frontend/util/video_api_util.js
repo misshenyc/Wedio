@@ -14,7 +14,6 @@ export const fetchVideo = (videoId) => {
 
 
 export const createVideo = (video) => {
-    ;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/`,
@@ -40,7 +39,6 @@ export const deleteVideo = (videoId) => {
 }
 
 export const likeVideo = (videoId) => {
-    // debugger;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/${videoId}/like`,
@@ -48,7 +46,6 @@ export const likeVideo = (videoId) => {
 }
 
 export const unlikeVideo = (videoId) => {
-    // debugger;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/${videoId}/unlike`,
@@ -56,7 +53,6 @@ export const unlikeVideo = (videoId) => {
 }
 
 export const dislikeVideo = (videoId) => {
-    // debugger;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/${videoId}/dislike`,
@@ -64,7 +60,6 @@ export const dislikeVideo = (videoId) => {
 }
 
 export const undislikeVideo = (videoId) => {
-    // debugger;
     return $.ajax({
         method: 'POST',
         url: `/api/videos/${videoId}/undislike`,

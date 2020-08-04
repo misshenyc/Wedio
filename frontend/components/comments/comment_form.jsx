@@ -5,7 +5,7 @@ class CommentForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            body: ''
+            body: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.navigateToVideoShow = this.navigateToVideoShow.bind(this);
@@ -13,7 +13,6 @@ class CommentForm extends React.Component{
 
     navigateToVideoShow(){
         const url =  `/videos/${this.props.match.params.videoId}`
-        // debugger
         this.props.history.push(url);
     }
 

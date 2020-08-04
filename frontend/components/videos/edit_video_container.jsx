@@ -24,7 +24,7 @@ class Wrapper extends React.Component {
 
 
 const msp = (state, ownProps) => {
-    // debugger
+    
     return {
       video: state.entities.videos[ownProps.match.params.videoId],
     }

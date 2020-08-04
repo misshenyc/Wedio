@@ -221,7 +221,7 @@ var demoLogin = function demoLogin() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, createComment */
+/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, createComment, editComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -246,6 +246,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undislikeVideo", function() { return undislikeVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editComment", function() { return editComment; });
 /* harmony import */ var _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/video_api_util */ "./frontend/util/video_api_util.js");
 /* harmony import */ var _util_comment_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/comment_api_util */ "./frontend/util/comment_api_util.js");
 
@@ -323,7 +324,6 @@ var receiveLike = function receiveLike(video) {
 
 var likeVideo = function likeVideo(videoId) {
   return function (dispatch) {
-    // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["likeVideo"](videoId).then(function (video) {
       return dispatch(receiveLike(video));
     });
@@ -339,7 +339,6 @@ var receiveUnlike = function receiveUnlike(video) {
 
 var unlikeVideo = function unlikeVideo(videoId) {
   return function (dispatch) {
-    // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["unlikeVideo"](videoId).then(function (video) {
       return dispatch(receiveUnlike(video));
     });
@@ -378,6 +377,14 @@ var undislikeVideo = function undislikeVideo(videoId) {
 
 
 var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+
+var receiveComment = function receiveComment(comment) {
+  return {
+    type: RECEIVE_COMMENT,
+    comment: comment
+  };
+};
+
 var createComment = function createComment(comment) {
   return function (dispatch) {
     return _util_comment_api_util__WEBPACK_IMPORTED_MODULE_1__["createComment"](comment).then(function (comment) {
@@ -385,11 +392,11 @@ var createComment = function createComment(comment) {
     });
   };
 };
-
-var receiveComment = function receiveComment(comment) {
-  return {
-    type: RECEIVE_COMMENT,
-    comment: comment
+var editComment = function editComment(comment) {
+  return function (dispatch) {
+    return _util_comment_api_util__WEBPACK_IMPORTED_MODULE_1__["updateComment"](comment).then(function (comment) {
+      return dispatch(receiveComment(comment));
+    });
   };
 };
 
@@ -470,6 +477,151 @@ var App = function App() {
 
 /***/ }),
 
+/***/ "./frontend/components/comments/comment_edit.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/comments/comment_edit.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CommentEdit = /*#__PURE__*/function (_React$Component) {
+  _inherits(CommentEdit, _React$Component);
+
+  var _super = _createSuper(CommentEdit);
+
+  function CommentEdit(props) {
+    var _this;
+
+    _classCallCheck(this, CommentEdit);
+
+    // debugger;
+    _this = _super.call(this, props);
+    _this.state = _this.props.comment;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.navigateToVideoShow = _this.navigateToVideoShow.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CommentEdit, [{
+    key: "navigateToVideoShow",
+    value: function navigateToVideoShow() {
+      var url = "/videos/".concat(this.props.match.params.videoId);
+      this.props.history.push(url);
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var videoId = parseInt(this.props.match.params.videoId);
+      var comment = Object.assign({}, this.state, {
+        video_id: videoId
+      });
+      this.props.editComment(comment);
+      this.navigateToVideoShow();
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      // debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment-edit-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Update your comment "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        cols: "80",
+        rows: "10",
+        value: this.state.body,
+        onChange: this.update('body')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, " Save ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.navigateToVideoShow
+      }, "Cancel"));
+    }
+  }]);
+
+  return CommentEdit;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(CommentEdit));
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comment_edit_container.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/comments/comment_edit_container.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
+/* harmony import */ var _comment_edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./comment_edit */ "./frontend/components/comments/comment_edit.jsx");
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    comment: state.entities.videos[ownProps.match.params.videoId].comments[ownProps.match.params.commentId]
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    editComment: function editComment(comment) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_1__["editComment"])(comment));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_comment_edit__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/comments/comment_form.jsx":
 /*!*******************************************************!*\
   !*** ./frontend/components/comments/comment_form.jsx ***!
@@ -531,8 +683,7 @@ var CommentForm = /*#__PURE__*/function (_React$Component) {
   _createClass(CommentForm, [{
     key: "navigateToVideoShow",
     value: function navigateToVideoShow() {
-      var url = "/videos/".concat(this.props.match.params.videoId); // debugger
-
+      var url = "/videos/".concat(this.props.match.params.videoId);
       this.props.history.push(url);
     }
   }, {
@@ -621,13 +772,28 @@ var mdp = function mdp(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_link_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/link_util */ "./frontend/util/link_util.jsx");
+/* harmony import */ var _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./comment_edit_container */ "./frontend/components/comments/comment_edit_container.jsx");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
+
+
+
 
 
 var CommentShow = function CommentShow(_ref) {
-  var comment = _ref.comment;
+  var comment = _ref.comment,
+      videoId = _ref.videoId,
+      editComment = _ref.editComment;
   var body = comment.body,
       user_id = comment.user_id;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body, " by ", user_id);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body, " by ", user_id, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    component: _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__["default"],
+    to: "/videos/".concat(videoId, "/comment/").concat(comment.id, "/edit"),
+    label: "Edit"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+    path: "/videos/:videoId/comment/:commentId/edit",
+    component: _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CommentShow);
@@ -744,14 +910,12 @@ function Modal(_ref) {
   var modal = _ref.modal,
       closeModal = _ref.closeModal;
 
-  // debugger
   if (!modal) {
     return null;
   }
 
   switch (modal) {
     case 'create':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -771,7 +935,6 @@ function Modal(_ref) {
 }
 
 var msp = function msp(state) {
-  // debugger
   return {
     modal: state.ui.modal
   };
@@ -1323,9 +1486,9 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
 
       if (this.state.videoFile) {
         formData.append('video[videoclip]', this.state.videoFile);
-      } // debugger;
+      }
 
-
+      ;
       this.props.createVideo(formData).then(function () {
         return _this2.props.closeCreateModal();
       }).then(this.setState({
@@ -1847,7 +2010,6 @@ var Wrapper = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var msp = function msp(state, ownProps) {
-  // debugger
   return {
     video: state.entities.videos[ownProps.match.params.videoId]
   };
@@ -1927,7 +2089,6 @@ var VideoIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
       var videoLis = this.props.videos.map(function (video) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: video.id,
@@ -1979,7 +2140,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
   return {
     videos: Object.values(state.entities.videos)
   };
@@ -2068,9 +2228,9 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
           likeVideo = _this$props.likeVideo,
           unlikeVideo = _this$props.unlikeVideo,
           dislikeVideo = _this$props.dislikeVideo,
-          undislikeVideo = _this$props.undislikeVideo;
-      if (!video) return null; // debugger;
-
+          undislikeVideo = _this$props.undislikeVideo,
+          editComment = _this$props.editComment;
+      if (!video) return null;
       var likeText = 'I like this';
 
       var likeAction = function likeAction() {
@@ -2099,12 +2259,14 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         };
       }
 
-      var commentList = function commentList(comments) {
+      var commentList = function commentList(comments, editComment) {
         if (!comments) return;
         return Object.values(comments).map(function (comment) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_show__WEBPACK_IMPORTED_MODULE_5__["default"], {
             comment: comment,
-            key: comment.id
+            key: comment.id,
+            editComment: editComment,
+            videoId: video.id
           });
         });
       };
@@ -2126,16 +2288,17 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         onClick: dislikeAction
       }, dislikeText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-dislikes-count"
-      }, video.dislikes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_3__["CommentLink"], {
+      }, video.dislikes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
         component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_2__["default"],
-        to: "/videos/".concat(video.id, "/review"),
+        to: "/videos/".concat(video.id, "/comment"),
         label: "Add a public comment"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
-        path: "/videos/:videoId/review",
+        exact: true,
+        path: "/videos/:videoId/comment",
         component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "show-comment"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), commentList(video.comments)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), commentList(video.comments, editComment)));
     }
   }]);
 
@@ -2169,7 +2332,6 @@ var msp = function msp(state, ownProps) {
 };
 
 var mdp = function mdp(dispatch) {
-  // debugger
   return {
     fetchVideo: function fetchVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["fetchVideo"])(videoId));
@@ -2185,6 +2347,9 @@ var mdp = function mdp(dispatch) {
     },
     undislikeVideo: function undislikeVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["undislikeVideo"])(videoId));
+    },
+    editComment: function editComment(comment) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["editComment"])(comment));
     }
   };
 };
@@ -2553,7 +2718,6 @@ var createComment = function createComment(comment) {
   });
 };
 var fetchComments = function fetchComments() {
-  // debugger;
   return $.ajax({
     method: 'GET',
     url: "/api/comments/"
@@ -2605,18 +2769,17 @@ var undislikeComment = function undislikeComment(commentId) {
 /*!*************************************!*\
   !*** ./frontend/util/link_util.jsx ***!
   \*************************************/
-/*! exports provided: CommentLink */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommentLink", function() { return CommentLink; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
-var CommentLink = function CommentLink(_ref) {
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var label = _ref.label,
       to = _ref.to;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -2628,7 +2791,7 @@ var CommentLink = function CommentLink(_ref) {
       }, label));
     }
   });
-};
+});
 
 /***/ }),
 
@@ -2764,7 +2927,6 @@ var fetchVideo = function fetchVideo(videoId) {
   });
 };
 var createVideo = function createVideo(video) {
-  ;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/",
@@ -2789,28 +2951,24 @@ var deleteVideo = function deleteVideo(videoId) {
   });
 };
 var likeVideo = function likeVideo(videoId) {
-  // debugger;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/".concat(videoId, "/like")
   });
 };
 var unlikeVideo = function unlikeVideo(videoId) {
-  // debugger;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/".concat(videoId, "/unlike")
   });
 };
 var dislikeVideo = function dislikeVideo(videoId) {
-  // debugger;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/".concat(videoId, "/dislike")
   });
 };
 var undislikeVideo = function undislikeVideo(videoId) {
-  // debugger;
   return $.ajax({
     method: 'POST',
     url: "/api/videos/".concat(videoId, "/undislike")

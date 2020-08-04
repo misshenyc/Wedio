@@ -7,7 +7,6 @@ export const createComment = comment => {
 }
 
 export const fetchComments = () => {
-    // debugger;
     return $.ajax({
         method: 'GET',
         url: `/api/comments/`

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CommentFormContainer from '../comments/comment_form_container'
-import { CommentLink } from '../../util/link_util';
+import CommentLink from '../../util/link_util';
 import { ProtectedRoute } from '../../util/route_util';
 import CommentShow from '../comments/comment_show';
 import CommentForm from '../comments/comment_form'
@@ -13,11 +13,16 @@ class VideoShow extends React.Component {
     }
 
     render() {
-        const { video, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo } = this.props;
+        const { 
+            video, 
+            likeVideo, 
+            unlikeVideo, 
+            dislikeVideo, 
+            undislikeVideo,
+            editComment } = this.props;
         
         if (!video) return null;
 
-        // debugger;
         let likeText = 'I like this'
         let likeAction = () => likeVideo(video.id);
         if (video.liked_by_current_user) {
@@ -32,11 +37,13 @@ class VideoShow extends React.Component {
             dislikeAction = () => undislikeVideo(video.id);
         }
 
-        const commentList = (comments) => {
+        const commentList = (comments, editComment) => {
             if (!comments) return;
             return Object.values(comments).map(comment => <CommentShow 
                 comment = {comment}
                 key = {comment.id}
+                editComment = {editComment}
+                videoId = {video.id}
             />)
         }
         
@@ -55,16 +62,16 @@ class VideoShow extends React.Component {
                 <div className = 'video-dislikes-count'>{video.dislikes}</div>
                 <CommentLink
                     component={CommentFormContainer}
-                    to={`/videos/${video.id}/review`}
+                    to={`/videos/${video.id}/comment`}
                     label="Add a public comment"
                 />
                 <ProtectedRoute
-                    path="/videos/:videoId/review"
+                    exact path="/videos/:videoId/comment"
                     component={CommentFormContainer}
                 />
                 <div className = 'show-comment'>
                     <h3> Comments </h3>
-                    {commentList(video.comments)}
+                    {commentList(video.comments, editComment)}
                 </div>
             </div>
         );

@@ -3,7 +3,8 @@ import VideoShow from './video_show';
 import { 
     fetchVideo, 
     likeVideo, unlikeVideo,
-    dislikeVideo, undislikeVideo 
+    dislikeVideo, undislikeVideo,
+    editComment,
 } from '../../actions/video_actions';
 
 const msp = (state, ownProps) => {
@@ -13,13 +14,14 @@ const msp = (state, ownProps) => {
 };
 
 const mdp = dispatch => {
-    // debugger
+    
     return {
         fetchVideo: videoId => dispatch(fetchVideo(videoId)),
         likeVideo: videoId => dispatch(likeVideo(videoId)),
         unlikeVideo: videoId => dispatch(unlikeVideo(videoId)),
         dislikeVideo: videoId => dispatch(dislikeVideo(videoId)),
         undislikeVideo: videoId => dispatch(undislikeVideo(videoId)),
+        editComment: comment => dispatch(editComment(comment)),
     }
 };
 

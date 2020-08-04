@@ -5,7 +5,6 @@ export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'REMOVE_VIDEO';
 export const CREATED_VIDEO = 'CREATED_VIDEO';
 
-
 const receiveAllVideos = videos => {
     return {
         type: RECEIVE_ALL_VIDEOS,
@@ -55,7 +54,9 @@ export const deleteVideo = videoId => dispatch => (
 );
 
 
+
 // LIKE & DISLIKES
+
 export const RECEIVE_LIKE = 'RECEIVE_LIKE';
 export const RECEIVE_UNLIKE = 'RECEIVE_UNLIKE';
 export const RECEIVE_DISLIKE = 'RECEIVE_DISLIKE';
@@ -67,8 +68,9 @@ const receiveLike = (video) => {
         video,
     }
 }
+
 export const likeVideo = videoId => dispatch => {
-    // debugger
+    
     return VideoAPIUtil.likeVideo(videoId)
         .then((video) => dispatch(receiveLike(video)))
 }
@@ -81,7 +83,7 @@ const receiveUnlike = (video) => {
 }
 
 export const unlikeVideo = videoId => dispatch => {
-    // debugger
+    
     return VideoAPIUtil.unlikeVideo(videoId)
         .then((video) => dispatch(receiveUnlike(video)))
 }
@@ -111,16 +113,11 @@ export const undislikeVideo = videoId => dispatch => {
 }
 
 
-//COMMENTS
 
+//COMMENTS
 
 import * as CommentAPIUtil from '../util/comment_api_util';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
-
-export const createComment = comment => dispatch => {
-    return CommentAPIUtil.createComment(comment)
-        .then(comment => dispatch(receiveComment(comment)));
-}
 
 const receiveComment = comment => {
     return {
@@ -128,4 +125,16 @@ const receiveComment = comment => {
         comment,
     }
 }
+
+export const createComment = comment => dispatch => {
+    return CommentAPIUtil.createComment(comment)
+        .then(comment => dispatch(receiveComment(comment)));
+}
+
+export const editComment = comment => dispatch => {
+    return CommentAPIUtil.updateComment(comment)
+        .then(comment => dispatch(receiveComment(comment)));
+}
+
+
 
