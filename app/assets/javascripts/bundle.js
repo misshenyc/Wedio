@@ -414,9 +414,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videos_video_index_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./videos/video_index_container */ "./frontend/components/videos/video_index_container.jsx");
 /* harmony import */ var _videos_video_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./videos/video_show_container */ "./frontend/components/videos/video_show_container.jsx");
 /* harmony import */ var _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./videos/edit_video_container */ "./frontend/components/videos/edit_video_container.jsx");
-/* harmony import */ var _sidebar_sidebar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sidebar/sidebar */ "./frontend/components/sidebar/sidebar.jsx");
-/* harmony import */ var _videos_currentuser_video_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./videos/currentuser_video_container */ "./frontend/components/videos/currentuser_video_container.jsx");
-/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _videos_create_video_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./videos/create_video_container */ "./frontend/components/videos/create_video_container.jsx");
+/* harmony import */ var _sidebar_sidebar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sidebar/sidebar */ "./frontend/components/sidebar/sidebar.jsx");
+/* harmony import */ var _videos_currentuser_video_container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./videos/currentuser_video_container */ "./frontend/components/videos/currentuser_video_container.jsx");
+/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
 
 
 
@@ -425,7 +426,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import CreateVideoContainer from './videos/create_video_container'
+
 
 
 
@@ -441,19 +442,19 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     id: "full-logo",
     src: window.fullLogo
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_11__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_12__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     exact: true,
     path: "/",
     component: _videos_video_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
+    path: "/videos/:videoId/edit",
+    component: _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/videos/:videoId",
     component: _videos_video_show_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
-    path: "/videos/:videoId/edit",
-    component: _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     path: "/users/video",
-    component: _videos_currentuser_video_container__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _videos_currentuser_video_container__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     exact: true,
     path: "/login",
@@ -743,12 +744,14 @@ function Modal(_ref) {
   var modal = _ref.modal,
       closeModal = _ref.closeModal;
 
+  // debugger
   if (!modal) {
     return null;
   }
 
   switch (modal) {
     case 'create':
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -768,6 +771,7 @@ function Modal(_ref) {
 }
 
 var msp = function msp(state) {
+  // debugger
   return {
     modal: state.ui.modal
   };
@@ -1380,7 +1384,7 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
             id: "select-file",
             onChange: this.handleFile.bind(this)
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            "for": "select-file",
+            htmlFor: "select-file",
             className: "select-files-label"
           }, "SELECT FILES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "By submitting your videos to YouTube, you acknowledge that you agree to YouTube's Terms of Service and Community Guidelines."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Please be sure not to violate others' copyright or privacy rights. Learn more"));
 
@@ -1411,7 +1415,7 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
 
         case 2:
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-            to: "users/video"
+            to: "/users/video"
           });
       }
     }
@@ -1445,6 +1449,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
+  debugger;
   return {
     video: {
       title: '',
@@ -1748,7 +1753,9 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
         placeholder: "Tell viewers about your video"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this4.props.deleteVideo(_this4.props.video.id);
+          return _this4.props.deleteVideo(_this4.props.video.id).then(function () {
+            return _this4.props.history.push("/users/video");
+          });
         }
       }, "Delete"));
     }

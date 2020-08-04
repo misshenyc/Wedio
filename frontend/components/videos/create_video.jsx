@@ -57,7 +57,7 @@ class CreateVideo extends React.Component {
                             id='select-file'
                             onChange={this.handleFile.bind(this)}
                         />
-                        <label for="select-file" className = 'select-files-label'>
+                        <label htmlFor="select-file" className = 'select-files-label'>
                             SELECT FILES
                         </label>
                         <p>By submitting your videos to YouTube, you acknowledge that you agree to YouTube's Terms of Service and Community Guidelines.</p>
@@ -93,7 +93,7 @@ class CreateVideo extends React.Component {
                 );
             case 2:
                 return (
-                    <Redirect to= 'users/video' />
+                    <Redirect to= '/users/video' />
                 )
         }
     }

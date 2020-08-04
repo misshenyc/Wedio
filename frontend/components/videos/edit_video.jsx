@@ -48,7 +48,10 @@ class EditVideo extends React.Component {
                     <button>Save</button>
                     <br />
                 </form>
-                    <button onClick = {()=>this.props.deleteVideo(this.props.video.id)}>Delete</button>
+                <button onClick={
+                    () => this.props.deleteVideo(this.props.video.id)
+                    .then(()=>this.props.history.push(`/users/video`))
+                    }>Delete</button>
             </div>
         );
     }

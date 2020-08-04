@@ -5,11 +5,13 @@ import CreateVideoContainer from '../videos/create_video_container'
 // import { ProtectedRoute } from '../../util/route_util';
 
 function Modal({ modal, closeModal }) {
+    // debugger
     if (!modal) {
         return null;
     }
     switch (modal) {
         case 'create':
+            // debugger
             return (
             <div className="modal-background" onClick={closeModal}>
                 <div className="modal-child" onClick={e => e.stopPropagation()}>
@@ -23,6 +25,7 @@ function Modal({ modal, closeModal }) {
 }
 
 const msp = state => {
+    // debugger
     return {
         modal: state.ui.modal,
     };

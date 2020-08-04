@@ -6,6 +6,7 @@ import {closeCreateModal} from '../../actions/modal_actions'
 
 
 const msp = (state, ownProps ) => {
+    debugger;
     return {
         video: {
             title: '',
