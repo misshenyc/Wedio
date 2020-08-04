@@ -8,19 +8,18 @@ import {
 
 const msp = (state, ownProps) => {
     return {
-        video: state.entities.videos[ownProps.match.params.videoId]
-
+        video: state.entities.videos[ownProps.match.params.videoId],
     }
 };
 
 const mdp = dispatch => {
     // debugger
     return {
-    fetchVideo: videoId => dispatch(fetchVideo(videoId)),
-    likeVideo: videoId => dispatch(likeVideo(videoId)),
-    unlikeVideo: videoId => dispatch(unlikeVideo(videoId)),
-    dislikeVideo: videoId => dispatch(dislikeVideo(videoId)),
-    undislikeVideo: videoId => dispatch(undislikeVideo(videoId)),
+        fetchVideo: videoId => dispatch(fetchVideo(videoId)),
+        likeVideo: videoId => dispatch(likeVideo(videoId)),
+        unlikeVideo: videoId => dispatch(unlikeVideo(videoId)),
+        dislikeVideo: videoId => dispatch(dislikeVideo(videoId)),
+        undislikeVideo: videoId => dispatch(undislikeVideo(videoId)),
     }
 };
 

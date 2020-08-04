@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import CommentFormContainer from '../comments/comment_form_container'
 import { CommentLink } from '../../util/link_util';
 import { ProtectedRoute } from '../../util/route_util';
-import CommentIndex from '../comments/comment_index';
 import CommentShow from '../comments/comment_show';
-import CommentIndexContainer from '../comments/comment_index_container'
 import CommentForm from '../comments/comment_form'
 
 class VideoShow extends React.Component {
@@ -19,6 +17,7 @@ class VideoShow extends React.Component {
         
         if (!video) return null;
 
+        // debugger;
         let likeText = 'I like this'
         let likeAction = () => likeVideo(video.id);
         if (video.liked_by_current_user) {
@@ -33,8 +32,9 @@ class VideoShow extends React.Component {
             dislikeAction = () => undislikeVideo(video.id);
         }
 
-        const commentList = (comments = []) => {
-            return comments.map(comment => <CommentShow 
+        const commentList = (comments) => {
+            if (!comments) return;
+            return Object.values(comments).map(comment => <CommentShow 
                 comment = {comment}
                 key = {comment.id}
             />)
@@ -53,7 +53,6 @@ class VideoShow extends React.Component {
                 <br/>
                 <button onClick = {dislikeAction}>{dislikeText}</button>
                 <div className = 'video-dislikes-count'>{video.dislikes}</div>
-
                 <CommentLink
                     component={CommentFormContainer}
                     to={`/videos/${video.id}/review`}
@@ -63,17 +62,10 @@ class VideoShow extends React.Component {
                     path="/videos/:videoId/review"
                     component={CommentFormContainer}
                 />
-
-                {/* <div className = 'add-comment'>
-                    <CommentForm/>
-                </div> */}
-
                 <div className = 'show-comment'>
                     <h3> Comments </h3>
-                    {commentList(Object.values(video.comments))}
+                    {commentList(video.comments)}
                 </div>
-
-
             </div>
         );
     }

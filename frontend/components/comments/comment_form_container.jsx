@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import {createComment} from '../../actions/comment_actions'
+import {createComment} from '../../actions/video_actions'
 import CommentForm from './comment_form';
 
 const mdp = dispatch => {
