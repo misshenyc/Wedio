@@ -18,6 +18,10 @@ export const openCreateModal = () => dispatch => {
     dispatch(openModal('create'));
 };
 
+export const openEditModal = () => dispatch => {
+    dispatch(openModal('edit'));
+};
+
 export const closeCreateModal=() => dispatch => {
     dispatch(closeModal());
 }

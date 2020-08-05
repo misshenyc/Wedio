@@ -5,6 +5,7 @@ import EditVideoContainer from '../videos/edit_video_container';
 import VideoEditLink from '../../util/link_util'
 import { ProtectedRoute } from '../../util/route_util';
 import CommentShow from '../comments/comment_show';
+import {openEditModal} from '../../actions/modal_actions';
 
 class VideoShow extends React.Component {
     
@@ -79,8 +80,12 @@ class VideoShow extends React.Component {
                                 label="EDIT"
                             />
                         </div>
+                        {/* <button onClick={() => dispatch(openEditModal())}>
+                            <i className="fas fa-cloud-upload-alt fa-lg"></i>
+                            <br />
+                            <span> Edit </span>
+                        </button>    */}
                     </div>
-
                 </section>
 
 

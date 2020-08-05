@@ -21,7 +21,7 @@ const mdp = dispatch => {
         unlikeVideo: videoId => dispatch(unlikeVideo(videoId)),
         dislikeVideo: videoId => dispatch(dislikeVideo(videoId)),
         undislikeVideo: videoId => dispatch(undislikeVideo(videoId)),
-        deleteComment: commentId => dispatch(deleteComment(commentId)),
+        deleteComment: commentId => dispatch(deleteComment(comment)),
     }
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { closeCreateModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import CreateVideoContainer from '../videos/create_video_container'
-// import { ProtectedRoute } from '../../util/route_util';
+import EditVideoContainer from '../videos/edit_video_container';
 
 function Modal({ modal, closeModal }) {
     
@@ -11,7 +11,6 @@ function Modal({ modal, closeModal }) {
     }
     switch (modal) {
         case 'create':
-            
             return (
             <div className="modal-background" onClick={closeModal}>
                 <div className="modal-child" onClick={e => e.stopPropagation()}>
@@ -19,6 +18,15 @@ function Modal({ modal, closeModal }) {
                     <CreateVideoContainer />
                 </div>
             </div>);
+        case 'edit':
+            return (
+                <div className="modal-background" onClick={closeModal}>
+                rawr
+                    <div className="modal-child" onClick={e => e.stopPropagation()}>
+                        <i className="fas fa-times fa-lg " onClick={closeModal}></i>
+                        <EditVideoContainer />
+                    </div>
+                </div>);
         default:
             return null;
     }

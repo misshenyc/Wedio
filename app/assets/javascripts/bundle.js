@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
   \*******************************************/
-/*! exports provided: OPEN_MODAL, CLOSE_MODAL, openModal, closeModal, openCreateModal, closeCreateModal */
+/*! exports provided: OPEN_MODAL, CLOSE_MODAL, openModal, closeModal, openCreateModal, openEditModal, closeCreateModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,6 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openModal", function() { return openModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeModal", function() { return closeModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCreateModal", function() { return openCreateModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openEditModal", function() { return openEditModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closeCreateModal", function() { return closeCreateModal; });
 var OPEN_MODAL = 'OPEN_MODAL';
 var CLOSE_MODAL = 'CLOSE_MODAL';
@@ -117,6 +118,11 @@ var closeModal = function closeModal() {
 var openCreateModal = function openCreateModal() {
   return function (dispatch) {
     dispatch(openModal('create'));
+  };
+};
+var openEditModal = function openEditModal() {
+  return function (dispatch) {
+    dispatch(openModal('edit'));
   };
 };
 var closeCreateModal = function closeCreateModal() {
@@ -960,10 +966,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _videos_create_video_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../videos/create_video_container */ "./frontend/components/videos/create_video_container.jsx");
+/* harmony import */ var _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../videos/edit_video_container */ "./frontend/components/videos/edit_video_container.jsx");
 
 
 
- // import { ProtectedRoute } from '../../util/route_util';
+
+
 
 function Modal(_ref) {
   var modal = _ref.modal,
@@ -987,6 +995,20 @@ function Modal(_ref) {
         className: "fas fa-times fa-lg ",
         onClick: closeModal
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_create_video_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+
+    case 'edit':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, "rawr", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-child",
+        onClick: function onClick(e) {
+          return e.stopPropagation();
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times fa-lg ",
+        onClick: closeModal
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_edit_video_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
 
     default:
       return null;
@@ -1959,28 +1981,35 @@ var EditVideo = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edit-video"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Edit Video Details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "edit-video-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "edit-video-title"
-      }, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "edit-title-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "edit-title",
         type: "text",
         value: this.state.title,
         onChange: this.update('title'),
         placeholder: "Add a title that describes your video"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "edit-video-description"
-      }, "Description", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "edit-description-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Description "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "edit-description",
         type: "text",
         value: this.state.description,
         onChange: this.update('description'),
         placeholder: "Tell viewers about your video"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Save")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           return _this4.props.deleteVideo(_this4.props.video.id).then(function () {
             return _this4.props.history.push("/users/video");
           });
         }
-      }, "Delete"));
+      }, "Delete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        className: "edit-video-clip",
+        src: this.state.clipUrl,
+        controls: true
+      }));
     }
   }]);
 
@@ -2233,6 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../videos/edit_video_container */ "./frontend/components/videos/edit_video_container.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _comments_comment_show__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../comments/comment_show */ "./frontend/components/comments/comment_show.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2254,6 +2284,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2429,7 +2460,7 @@ var mdp = function mdp(dispatch) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["undislikeVideo"])(videoId));
     },
     deleteComment: function deleteComment(commentId) {
-      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["deleteComment"])(commentId));
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["deleteComment"])(comment));
     }
   };
 };
