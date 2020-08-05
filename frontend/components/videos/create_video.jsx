@@ -60,8 +60,7 @@ class CreateVideo extends React.Component {
                         <label htmlFor="select-file" className = 'select-files-label'>
                             SELECT FILES
                         </label>
-                        <p>By submitting your videos to YouTube, you acknowledge that you agree to YouTube's Terms of Service and Community Guidelines.</p>
-                        <p>Please be sure not to violate others' copyright or privacy rights. Learn more</p>
+                        <p>By submitting your videos to YouTube, you acknowledge that you agree to YouTube's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights. Learn more</p>
                     </div>
                 );
             case 1:
@@ -81,13 +80,16 @@ class CreateVideo extends React.Component {
                                 <textarea
                                     value={this.state.description}
                                     onChange={this.update('description')}
-                                    placeholder = 'Description'
+                                    placeholder = 'Description (Tell viewers about your video) '
                                     className = 'upload-description'
                                 />    
                             </div>
                             {preview}
                             <br/>
-                            <button type='submit'>SAVE</button>
+                            <div className = 'upload-button'>
+                                <button type='submit'>SAVE</button>
+                            </div>
+                            
                         </form>
                     </div>
                 );

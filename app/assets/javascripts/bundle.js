@@ -585,11 +585,12 @@ var CommentEdit = /*#__PURE__*/function (_React$Component) {
         className: "comment-edit-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Update your comment "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         cols: "80",
         rows: "10",
         value: this.state.body,
-        onChange: this.update('body')
+        onChange: this.update('body'),
+        placeholder: "Update your comment"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit"
       }, " Save ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -727,19 +728,27 @@ var CommentForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "comment-form"
+        className: "comment-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "comment-form",
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Leave a comment"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        cols: "80",
-        rows: "10",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "img-entry"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        id: "profile",
+        src: window.profile
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.body,
-        onChange: this.update('body')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onChange: this.update('body'),
+        placeholder: "Add a public comment",
+        className: "comment-entry"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "comment",
         type: "submit"
-      }, " Submit ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " COMMENT")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "cancel",
         onClick: this.navigateToVideoShow
-      }, "Cancel"));
+      }, "CANCEL"));
     }
   }]);
 
@@ -812,11 +821,13 @@ var CommentShow = function CommentShow(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body, " by ", user_id, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_1__["default"], {
     component: _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__["default"],
     to: "/videos/".concat(videoId, "/comment/").concat(comment.id, "/edit"),
-    label: "Edit"
+    label: "Edit",
+    className: "edit-comment"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
     path: "/videos/:videoId/comment/:commentId/edit",
     component: _comment_edit_container__WEBPACK_IMPORTED_MODULE_2__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "delete-comment",
     onClick: function onClick() {
       return deleteComment(comment.id) // .then(() => props.history.push(`/videos/${videoId}`))
       .then(function () {
@@ -1579,7 +1590,7 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: "select-file",
             className: "select-files-label"
-          }, "SELECT FILES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "By submitting your videos to YouTube, you acknowledge that you agree to YouTube's Terms of Service and Community Guidelines."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Please be sure not to violate others' copyright or privacy rights. Learn more"));
+          }, "SELECT FILES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "By submitting your videos to YouTube, you acknowledge that you agree to YouTube's Terms of Service and Community Guidelines. Please be sure not to violate others' copyright or privacy rights. Learn more"));
 
         case 1:
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1600,11 +1611,13 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
             value: this.state.description,
             onChange: this.update('description'),
-            placeholder: "Description",
+            placeholder: "Description (Tell viewers about your video) ",
             className: "upload-description"
-          })), preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          })), preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "upload-button"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "submit"
-          }, "SAVE")));
+          }, "SAVE"))));
 
         case 2:
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
@@ -1642,7 +1655,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
-  debugger;
+  // debugger;
   return {
     video: {
       title: '',
@@ -2198,12 +2211,11 @@ var mdp = function mdp(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../comments/comment_form_container */ "./frontend/components/comments/comment_form_container.jsx");
-/* harmony import */ var _util_link_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/link_util */ "./frontend/util/link_util.jsx");
+/* harmony import */ var _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../comments/comment_form_container */ "./frontend/components/comments/comment_form_container.jsx");
+/* harmony import */ var _util_link_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/link_util */ "./frontend/util/link_util.jsx");
+/* harmony import */ var _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../videos/edit_video_container */ "./frontend/components/videos/edit_video_container.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _comments_comment_show__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../comments/comment_show */ "./frontend/components/comments/comment_show.jsx");
-/* harmony import */ var _comments_comment_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../comments/comment_form */ "./frontend/components/comments/comment_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2262,28 +2274,28 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
           deleteComment = _this$props.deleteComment,
           history = _this$props.history;
       if (!video) return null;
-      var likeText = 'I like this';
+      var likeText = 'LIKE';
 
       var likeAction = function likeAction() {
         return likeVideo(video.id);
       };
 
       if (video.liked_by_current_user) {
-        likeText = 'Unlike';
+        likeText = 'UNDO';
 
         likeAction = function likeAction() {
           return unlikeVideo(video.id);
         };
       }
 
-      var dislikeText = 'I dislike this';
+      var dislikeText = 'DISLIKE';
 
       var dislikeAction = function dislikeAction() {
         return dislikeVideo(video.id);
       };
 
       if (video.disliked_by_current_user) {
-        dislikeText = 'Undo dislike';
+        dislikeText = 'UNDO';
 
         dislikeAction = function dislikeAction() {
           return undislikeVideo(video.id);
@@ -2306,28 +2318,47 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        className: "show-video-clip",
         src: video.clipUrl,
         controls: true
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "show-video-title"
-      }, video.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "show-video-description"
-      }, video.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, video.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "show-video-details"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "details-left"
+      }, " 7,018,210 views \u2022 Jan 1, 2020 "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "details-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "detail",
         onClick: likeAction
-      }, likeText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "video-likes-count"
-      }, video.likes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, likeText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-thumbs-up"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, video.likes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "detail",
         onClick: dislikeAction
-      }, dislikeText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "video-dislikes-count"
-      }, video.dislikes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_2__["default"],
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, dislikeText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-thumbs-down"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, video.dislikes)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "detail"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-share"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " SHARE ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "detail"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-edit"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        component: _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_3__["default"],
+        to: "/videos/".concat(video.id, "/edit"),
+        label: "EDIT"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_1__["default"],
         to: "/videos/".concat(video.id, "/comment"),
         label: "Add a public comment"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_4__["ProtectedRoute"], {
         exact: true,
         path: "/videos/:videoId/comment",
-        component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+        component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "show-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), commentList(video.comments, deleteComment)));

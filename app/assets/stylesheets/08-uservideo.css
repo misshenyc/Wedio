@@ -29,7 +29,6 @@
     width: 80px;
     object-fit: cover;
     border-radius: 50%;
-    overflow: hidden;
 }
 
 .channel-title {

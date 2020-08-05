@@ -32,12 +32,12 @@ class CommentEdit extends React.Component {
         return (
             <div className='comment-edit-form'>
                 <form onSubmit={this.handleSubmit}>
-                    <label> Update your comment </label>
                     <textarea
                         cols='80'
                         rows='10'
                         value={this.state.body}
                         onChange={this.update('body')}
+                        placeholder = 'Update your comment'
                     />
                     <button type='submit'> Save </button>
                 </form>

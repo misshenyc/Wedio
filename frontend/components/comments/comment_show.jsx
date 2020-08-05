@@ -18,12 +18,13 @@ const CommentShow = (props) => {
                 component={CommentEditContainer}
                 to={`/videos/${videoId}/comment/${comment.id}/edit`}
                 label="Edit"
+                className = 'edit-comment'
             />
             <ProtectedRoute
                 path="/videos/:videoId/comment/:commentId/edit"
                 component={CommentEditContainer}
             />
-            <button onClick = {
+            <button className = 'delete-comment' onClick = {
                 ()=>deleteComment(comment.id)
                 // .then(() => props.history.push(`/videos/${videoId}`))
                 .then(() => refreshPage())

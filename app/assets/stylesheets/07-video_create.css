@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .upload-header{
     height: 40px;
     float: left;
@@ -7,14 +11,14 @@
     width: 90%;
 }
 
-/* .create-video-step1 */
 .create-video-step1, .create-video-step2{
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    height: 90%;
 }
 
+/* .create-video-step1 */
 
 .fa-arrow-circle-up:before{
     color: #606060;
@@ -29,9 +33,8 @@ h5 {
 
 p {
     font-size: 12px;
-    margin: 5px;
-    display: flex;
-    align-content: center;
+    margin: 10px;
+    text-align: center;
 }
 
 .select-files-btn {
@@ -64,10 +67,64 @@ p {
 
 /* .create-video-step2 */
 
-.upload-form-content{
-    display:flex;
-    justify-content: center;
+.upload-form{
+    overflow: scroll;
+    margin-left: 20px;
 }
+
+.title-description{
+    width: 96%;
+    display: block;
+}
+
+.upload-title{
+    font-size: 14px;
+    border: solid 1px #ccc;
+    height: 30px;
+    text-align: justify;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.upload-description{
+    font-size: 14px;
+    border: solid 1px #ccc;
+    height: 80px;
+    text-align: justify;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.preview{
+    width: 98%;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.upload-form button{
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #065fd4;
+    color: white;
+    height: 30px;
+    width: 130px;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    float: right;
+}
+
+
 
 
 
