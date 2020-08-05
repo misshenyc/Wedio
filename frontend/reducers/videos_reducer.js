@@ -8,6 +8,7 @@ import {
     RECEIVE_DISLIKE,
     RECEIVE_UNDISLIKE,
     RECEIVE_UNLIKE,
+    SEARCH_VIDEOS,
 } from '../actions/video_actions'
 import merge from 'lodash/merge';
 

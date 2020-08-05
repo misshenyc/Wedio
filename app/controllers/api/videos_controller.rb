@@ -3,7 +3,12 @@ class Api::VideosController < ApplicationController
     before_action :require_logged_in, only: [:create, :update, :destroy]
 
     def index
-        @videos = Video.includes(:comments)
+        if params[:query]
+            @videos = Video.where('title LIKE ?', "%#{params[:query]}%").includes(:comments)
+            # @videos = Video.where('title LIKE ?', "%upstate%").includes(:comments)
+        else
+            @videos = Video.includes(:comments)
+        end
         render :index
     end
 

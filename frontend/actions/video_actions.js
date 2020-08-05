@@ -150,4 +150,12 @@ export const deleteComment = commentId => dispatch => {
 }
 
 
+//SEARCH
 
+export const searchVideos = (query) => dispatch => {
+    debugger
+    return VideoAPIUtil.searchVideos(query)
+        .then(videos => {
+            dispatch(receiveAllVideos(videos))
+        })
+}

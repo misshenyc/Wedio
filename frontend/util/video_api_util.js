@@ -1,8 +1,14 @@
-import { $CombinedState } from "redux"
 
 export const fetchVideos = () => {
     return $.ajax({
         url: '/api/videos'
+    })
+}
+
+export const searchVideos =(query)=> {
+    debugger
+    return $.ajax({
+        url: `/api/videos/search${query}`
     })
 }
 
