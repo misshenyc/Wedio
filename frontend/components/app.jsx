@@ -7,6 +7,7 @@ import LogInFormContainer from './session_form/login_form_container';
 import VideoIndexContainer from './videos/video_index_container';
 import VideoShowContainer from './videos/video_show_container';
 import EditVideoContainer from './videos/edit_video_container';
+import EditCommentContainer from './comments/comment_edit_container'
 import CreateVideoContainer from './videos/create_video_container'
 import SideBar from './sidebar/sidebar'
 import CurrentUserVideoContainer from './videos/currentuser_video_container';
@@ -32,6 +33,7 @@ const App = () => (
             <ProtectedRoute path="/users/video" component={CurrentUserVideoContainer} />
             <AuthRoute exact path="/login" component={LogInFormContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
+            {/* <ProtectedRoute exact path="/videos/:videoId/comment/:commentId/edit" component={EditCommentContainer}/> */}
         </Switch>
     </div>
 );

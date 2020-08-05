@@ -78,12 +78,9 @@ class VideoShow extends React.Component {
                                 to={`/videos/${video.id}/edit`}
                                 label="EDIT"
                             />
-                            {/* <ProtectedRoute
-                                exact path="/videos/:videoId/comment"
-                                component={CommentFormContainer}
-                            /> */}
                         </div>
                     </div>
+
                 </section>
 
 

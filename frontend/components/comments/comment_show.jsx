@@ -12,23 +12,37 @@ const CommentShow = (props) => {
     }
     // debugger
     return(
-        <div>
-            {body} by {user_id}
-            <CommentEditLink
-                component={CommentEditContainer}
-                to={`/videos/${videoId}/comment/${comment.id}/edit`}
-                label="Edit"
-                className = 'edit-comment'
-            />
-            <ProtectedRoute
-                path="/videos/:videoId/comment/:commentId/edit"
-                component={CommentEditContainer}
-            />
-            <button className = 'delete-comment' onClick = {
-                ()=>deleteComment(comment.id)
-                // .then(() => props.history.push(`/videos/${videoId}`))
-                .then(() => refreshPage())
-            }> Delete </button>
+        <div className = 'comment-content'>
+            <span className ='comment-body'>{body} by {user_id}</span>
+            <div className = 'edit-dropdown'>
+                <i className="fas fa-ellipsis-v"></i>
+                <div className = 'edit-content'>
+                    <div className = 'edit-comment'>
+                        <i className="far fa-edit"></i>
+                        <CommentEditLink
+                            component={CommentEditContainer}
+                            to={`/videos/${videoId}/comment/${comment.id}/edit`}
+                            label="Edit"
+                            className = 'edit-comment'
+                        />
+                        <ProtectedRoute
+                            path="/videos/:videoId/comment/:commentId/edit"
+                            component={CommentEditContainer}
+                        />
+                    </div>
+                    <button 
+                        className = 'delete-comment' 
+                        onClick = {
+                            ()=>deleteComment(comment.id)
+                            // .then(() => props.history.push(`/videos/${videoId}`))
+                            .then(() => refreshPage())
+                            }> 
+                        <i className="fas fa-trash"></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+            
         </div>
     )
 }

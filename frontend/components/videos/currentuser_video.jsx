@@ -43,22 +43,22 @@ class CurrentUserVideo extends React.Component {
                     <div className="container">
                         <ul>
                             <li className="nav-item">
-                                <a href="#" className="current">Home</a>
+                                <a href = '#'>Home</a>
                             </li>
                             <li className="nav-item">
-                                <a href="#">Videos</a>
+                                <a href="https://www.youtube.com/user/milliewastaken">Videos</a>
                             </li>
                             <li className="nav-item">
-                                <a href="#">Playlists</a>
+                                <a href="https://www.youtube.com/user/milliewastaken">Playlists</a>
                             </li>
                             <li className="nav-item">
-                                <a href="#">Community</a>
+                                <a href="https://www.youtube.com/user/milliewastaken">Community</a>
                             </li>
                             <li className="nav-item">
-                                <a href="#">Channels</a>
+                                <a href="https://www.youtube.com/user/milliewastaken/">Channels</a>
                             </li>
                             <li className="nav-item">
-                                <a href="#">About</a>
+                                <a href="https://www.youtube.com/user/milliewastaken">About</a>
                             </li>
                         </ul>
                     </div>

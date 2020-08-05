@@ -92,10 +92,7 @@
     padding: 1.5rem 3.2rem;
 }
 
-.nav-item a.current {
-    border-bottom: 0.3rem solid #606060;
-}
-
 .nav-item a:hover {
     color: #606060;
+    border-bottom: 2px solid #606060;
 }
