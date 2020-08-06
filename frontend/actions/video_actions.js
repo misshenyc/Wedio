@@ -4,6 +4,7 @@ export const RECEIVE_ALL_VIDEOS = 'RECEIVE_ALL_VIDEOS';
 export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'REMOVE_VIDEO';
 export const CREATED_VIDEO = 'CREATED_VIDEO';
+export const RECEIVE_CREATED_VIDEO = 'RECEIVE_CREATED_VIDEO';
 
 const receiveAllVideos = videos => {
     return {
@@ -15,6 +16,13 @@ const receiveAllVideos = videos => {
 export const receiveVideo = video => {
     return {
         type: RECEIVE_VIDEO,
+        video,
+    }
+}
+
+export const receiveCreatedVideo = video => {
+    return {
+        type: RECEIVE_CREATED_VIDEO,
         video,
     }
 }
@@ -39,8 +47,12 @@ export const fetchVideo = videoId => dispatch => {
 }
 
 export const createVideo = video => dispatch => {
+    // debugger
     return VideoAPIUtil.createVideo(video)
-        // .then(video => dispatch(receiveVideo(video)))
+        .then(video => {
+            // debugger
+            dispatch(receiveCreatedVideo(video))
+        })
 }
 
 export const updateVideo = video => dispatch => (

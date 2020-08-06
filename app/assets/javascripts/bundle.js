@@ -227,7 +227,7 @@ var demoLogin = function demoLogin() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, receiveVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, REMOVE_COMMENT, createComment, editComment, deleteComment, searchVideos */
+/*! exports provided: RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO, CREATED_VIDEO, RECEIVE_CREATED_VIDEO, receiveVideo, receiveCreatedVideo, fetchVideos, fetchVideo, createVideo, updateVideo, deleteVideo, RECEIVE_LIKE, RECEIVE_UNLIKE, RECEIVE_DISLIKE, RECEIVE_UNDISLIKE, likeVideo, unlikeVideo, dislikeVideo, undislikeVideo, RECEIVE_COMMENT, REMOVE_COMMENT, createComment, editComment, deleteComment, searchVideos */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -236,7 +236,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_VIDEO", function() { return RECEIVE_VIDEO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_VIDEO", function() { return REMOVE_VIDEO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATED_VIDEO", function() { return CREATED_VIDEO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CREATED_VIDEO", function() { return RECEIVE_CREATED_VIDEO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveVideo", function() { return receiveVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCreatedVideo", function() { return receiveCreatedVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchVideos", function() { return fetchVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchVideo", function() { return fetchVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
@@ -263,6 +265,7 @@ var RECEIVE_ALL_VIDEOS = 'RECEIVE_ALL_VIDEOS';
 var RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 var REMOVE_VIDEO = 'REMOVE_VIDEO';
 var CREATED_VIDEO = 'CREATED_VIDEO';
+var RECEIVE_CREATED_VIDEO = 'RECEIVE_CREATED_VIDEO';
 
 var receiveAllVideos = function receiveAllVideos(videos) {
   return {
@@ -274,6 +277,12 @@ var receiveAllVideos = function receiveAllVideos(videos) {
 var receiveVideo = function receiveVideo(video) {
   return {
     type: RECEIVE_VIDEO,
+    video: video
+  };
+};
+var receiveCreatedVideo = function receiveCreatedVideo(video) {
+  return {
+    type: RECEIVE_CREATED_VIDEO,
     video: video
   };
 };
@@ -301,7 +310,11 @@ var fetchVideo = function fetchVideo(videoId) {
 };
 var createVideo = function createVideo(video) {
   return function (dispatch) {
-    return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["createVideo"](video); // .then(video => dispatch(receiveVideo(video)))
+    // debugger
+    return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["createVideo"](video).then(function (video) {
+      // debugger
+      dispatch(receiveCreatedVideo(video));
+    });
   };
 };
 var updateVideo = function updateVideo(video) {
@@ -1860,7 +1873,6 @@ var CreateVideo = /*#__PURE__*/function (_React$Component) {
         formData.append('video[videoclip]', this.state.videoFile);
       }
 
-      ;
       this.props.createVideo(formData).then(function () {
         return _this2.props.closeCreateModal();
       }).then(this.setState({
@@ -3012,6 +3024,7 @@ var VideosReducer = function VideosReducer() {
       return action.videos;
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEO"]:
+      // debugger;
       return _defineProperty({}, action.video.id, action.video);
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_VIDEO"]:
@@ -3059,6 +3072,11 @@ var VideosReducer = function VideosReducer() {
       state4[action.video.id]['disliked_by_current_user'] = false;
       state4[action.video.id].dislikes = action.video.dislikes;
       return state4;
+
+    case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CREATED_VIDEO"]:
+      var state7 = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      state7[action.video.id] = action.video;
+      return state7;
 
     default:
       return state;

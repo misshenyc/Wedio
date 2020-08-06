@@ -9,6 +9,7 @@ import {
     RECEIVE_UNDISLIKE,
     RECEIVE_UNLIKE,
     SEARCH_VIDEOS,
+    RECEIVE_CREATED_VIDEO,
 } from '../actions/video_actions'
 import merge from 'lodash/merge';
 
@@ -19,6 +20,7 @@ const VideosReducer = (state = {}, action) => {
         case RECEIVE_ALL_VIDEOS:
             return action.videos
         case RECEIVE_VIDEO:
+            // debugger;
             return { [action.video.id]: action.video }
         case REMOVE_VIDEO:
             let state0 = Object.assign({}, state);
@@ -59,6 +61,10 @@ const VideosReducer = (state = {}, action) => {
             state4[action.video.id]['disliked_by_current_user'] = false;
             state4[action.video.id].dislikes = action.video.dislikes;
             return state4;
+        case RECEIVE_CREATED_VIDEO:
+            let state7 = merge({},state);
+            state7[action.video.id] = action.video; 
+            return state7;
         default:
             return state;
     }
