@@ -8,6 +8,25 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :videos,
+    foreign_key: :creator_id,
+    class_name: :Video
+
+  has_many :likes
+
+  has_many :liked_videos,
+    through: :likes,
+    source: :video
+
+  has_many :dislikes
+
+  has_many :disliked_videos,
+    through: :dislikes,
+    source: :video
+
+  has_many :comments;
+
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     return nil unless user

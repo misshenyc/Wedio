@@ -3,7 +3,25 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create]
     resource :session, only: [:create, :destroy, :show]
+    match 'videos/search', to: 'videos#index', via: :get
+    resources :videos, only: [:create, :index, :show, :update, :destroy] do
+      member do 
+        post 'like'
+        post 'unlike'
+        post 'dislike'
+        post 'undislike'
+      end
+    end
+    resources :comments, only: [ :show, :create, :update, :destroy] do
+      # member do 
+      #   post 'like'
+      #   post 'unlike'
+      #   post 'dislike'
+      #   post 'undislike'
+      # end
+    end
   end
+  
 
 
   root "static_pages#root"

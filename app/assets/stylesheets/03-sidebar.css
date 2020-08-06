@@ -1,0 +1,36 @@
+.sidebar{
+    padding: 1px 1.5px;
+    background-color:white;
+    width: 72px;
+    /* border-right: 0.5px solid #ccc; */
+    position: fixed;
+    top: 57px;
+    bottom: 0;
+    /* left: 100%; */
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 12px;
+}
+
+.home, .library, .upload, .linkedin, .github {
+    padding: 16px 0 14px;
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home:hover, .library:hover, .upload:hover, .linkedin:hover, .github:hover  {
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+

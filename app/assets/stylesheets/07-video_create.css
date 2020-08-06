@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+}
+
+.upload-header{
+    height: 40px;
+    float: left;
+    font-size: large;
+    font-weight: bold;
+    padding: 20px 16px 0 24px;
+    width: 90%;
+}
+
+.create-video-step1, .create-video-step2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 90%;
+}
+
+/* .create-video-step1 */
+
+.fa-arrow-circle-up:before{
+    color: #606060;
+    height: 200px;
+    align-items: center;
+    display: flex;
+}
+
+h5 {
+    margin: 5px;
+}
+
+p {
+    font-size: 12px;
+    margin: 10px;
+    text-align: center;
+}
+
+.select-files-btn {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.select-files-btn + .select-files-label {
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #065fd4;
+    color: white;
+    display: inline-block;
+    margin: 20px;
+    height: 30px;
+    width: 130px;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-files-label:hover {
+    cursor: pointer;
+}
+
+/* .create-video-step2 */
+
+.upload-form{
+    overflow: scroll;
+    margin-left: 20px;
+}
+
+.title-description{
+    width: 90%;
+    display: block;
+    margin: 20px;
+}
+
+.upload-title{
+    font-size: 14px;
+    border: solid 1px #ccc;
+    height: 30px;
+    text-align: justify;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.upload-description{
+    font-size: 14px;
+    border: solid 1px #ccc;
+    height: 80px;
+    text-align: justify;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.preview{
+    width: 92%;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.upload-button{
+    border-bottom: 2px solid #eee;
+}
+
+.upload-form button{
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #065fd4;
+    color: white;
+    height: 30px;
+    width: 100px;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    float: right;
+    position: absolute;
+    right: 83px;
+    bottom: -22px;
+}
+
+
+
+
+
+
+
+
+
+
