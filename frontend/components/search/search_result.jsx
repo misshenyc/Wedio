@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 class SearchResults extends React.Component {
     componentDidMount() {
-        // debugger;
+        
         this.props.searchVideos(this.props.location.search);
     }
 
     render() {
-        // debugger;
+        
         const videoLis = this.props.videos.map(video => {
             return (<li key={video.id} className='search-video-container'>
                 <video controls className='search-video-clip'>

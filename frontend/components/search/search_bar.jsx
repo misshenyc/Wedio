@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        // debugger;
+        
         this.props.history.push(`/videos/search?query=${this.state.input}`)
     }
 

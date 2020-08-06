@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 class CommentEdit extends React.Component {
     constructor(props) {
-        // debugger;
+        
         super(props);
         this.state = this.props.comment
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +28,7 @@ class CommentEdit extends React.Component {
     }
 
     render() {
-        // debugger;
+        
         return (
             <div className='comment-edit-form'>
                 <form onSubmit={this.handleSubmit}>
