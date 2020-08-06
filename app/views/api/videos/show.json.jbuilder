@@ -1,7 +1,4 @@
-
-
 json.partial! 'video', video: @video
-
 
 json.comments do
     @video.comments.each do |comment|
@@ -10,4 +7,3 @@ json.comments do
         end
     end
 end
-
