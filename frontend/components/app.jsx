@@ -16,14 +16,16 @@ import SearchBar from './search/search_bar';
 import SearchBarContainer from './search/search_bar_container'
 
 const App = () => (
-    <div>
+    <div className = 'full-height'>
         <header>
-            <Link to="/" className="header-link">
-                <img id = 'hamburger-menu' src = {window.hamburgerIcon}/>           
-                <img id = 'full-logo' src = {window.fullLogo}/>           
-            </Link>
-            <SearchBarContainer />
-            <GreetingContainer />
+            <div className = 'navbar'>
+                <Link to="/" className="header-link">
+                    <img id = 'hamburger-menu' src = {window.hamburgerIcon}/>           
+                    <img id = 'full-logo' src = {window.fullLogo}/>           
+                </Link>
+                <SearchBarContainer />
+                <GreetingContainer />
+            </div>
             <SideBar />
         </header>
         

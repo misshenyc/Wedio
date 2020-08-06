@@ -1,8 +1,12 @@
 .video-show{
     margin-left:100px;
-    margin-top: 24px;
+    padding-top: 20px;
+    padding-left: 20px;
     padding-right: 40%;
     overflow: scroll;
+    background-color: #fafafa;
+    padding-bottom: 300px;
+    padding-top: 100px;
 }
 
 .show-video-clip{

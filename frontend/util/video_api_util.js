@@ -6,7 +6,7 @@ export const fetchVideos = () => {
 }
 
 export const searchVideos =(query)=> {
-    debugger
+    // debugger
     return $.ajax({
         url: `/api/videos/search${query}`
     })
