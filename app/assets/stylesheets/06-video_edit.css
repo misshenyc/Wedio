@@ -3,11 +3,12 @@
 }
 
 .edit-video{
-    margin-left:150px;
+    margin-left:75px;
     padding-right: 40%;
     background-color: #fafafa;
     padding-bottom: 300px;
     padding-top: 100px;
+    padding-left: 40px;
 }
 
 .edit-title{

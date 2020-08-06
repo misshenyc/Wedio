@@ -310,9 +310,7 @@ var fetchVideo = function fetchVideo(videoId) {
 };
 var createVideo = function createVideo(video) {
   return function (dispatch) {
-    // debugger
     return _util_video_api_util__WEBPACK_IMPORTED_MODULE_0__["createVideo"](video).then(function (video) {
-      // debugger
       dispatch(receiveCreatedVideo(video));
     });
   };
@@ -860,7 +858,6 @@ var CommentShow = function CommentShow(props) {
     window.location.reload(false);
   };
 
-  debugger;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -3024,7 +3021,6 @@ var VideosReducer = function VideosReducer() {
       return action.videos;
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_VIDEO"]:
-      // debugger;
       return _defineProperty({}, action.video.id, action.video);
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_VIDEO"]:

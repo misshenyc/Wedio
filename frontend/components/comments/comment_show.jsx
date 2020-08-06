@@ -11,7 +11,7 @@ const CommentShow = (props) => {
         window.location.reload(false);
     }
     
-    debugger
+    
 
     return(
         <div className = 'comment-content'>
