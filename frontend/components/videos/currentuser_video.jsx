@@ -36,8 +36,12 @@ class CurrentUserVideo extends React.Component {
                         <div className="channel-subscribers">1,234,567 subscribers</div>        
                     </div>  
                     <div className="channel-subscribe">
-                        <button className="subscribe-button">SUBSCRIBED</button>
-                        <button className="notifi-button" aria-label="Enable Notifications"><i className="fas fa-bell" aria-hidden="true"></i></button>
+                        <a href="mailto: misshenyc@gmail.com">
+                            <button className="subscribe-button">SUBSCRIBED</button>
+                            <button className="notifi-button" aria-label="Enable Notifications">
+                                <i className="fas fa-bell" aria-hidden="true"></i>
+                            </button>
+                        </a>
                     </div>        
                 </section>
 

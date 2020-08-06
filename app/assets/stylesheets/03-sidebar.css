@@ -4,7 +4,7 @@
     width: 72px;
     /* border-right: 0.5px solid #ccc; */
     position: fixed;
-    top: 57px;
+    top: 55px;
     bottom: 0;
     /* left: 100%; */
     overflow-y: hidden;
@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: flex-start;
     font-size: 12px;
+    z-index: 10;
 }
 
 .home, .library, .upload, .linkedin, .github {
@@ -32,5 +33,10 @@
 .home:hover, .library:hover, .upload:hover, .linkedin:hover, .github:hover  {
     background-color: #eeeeee;
     cursor: pointer;
+}
+
+ 
+.sidebar .fas, .sidebar .fab{
+    color: #606060;
 }
 

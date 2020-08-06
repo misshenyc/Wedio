@@ -15,12 +15,17 @@ import ModalContainer from './modal/modal';
 import SearchBar from './search/search_bar';
 import SearchBarContainer from './search/search_bar_container'
 
+
 const App = () => (
     <div className = 'full-height'>
         <header>
             <div className = 'navbar'>
+                <img 
+                    id = 'hamburger-menu' 
+                    src = {window.hamburgerIcon}
+                    onClick = {()=>menuClick()}
+                />           
                 <Link to="/" className="header-link">
-                    <img id = 'hamburger-menu' src = {window.hamburgerIcon}/>           
                     <img id = 'full-logo' src = {window.fullLogo}/>           
                 </Link>
                 <SearchBarContainer />
@@ -28,9 +33,8 @@ const App = () => (
             </div>
             <SideBar />
         </header>
-        
-        <ModalContainer />
 
+        <ModalContainer />
         <Switch>
             <Route exact path="/" component={VideoIndexContainer} />
             {/* <Route path="/" component={SearchBarContainer} /> */}
@@ -46,3 +50,23 @@ const App = () => (
 );
 
 export default App;
+
+const menuClick = ()=>{
+    event.stopPropagation();
+    if ($("body").hasClass("opened")) {
+        $(".sidebar").animate({
+            width: "59px"
+        }, 300);
+        $("body").removeClass('opened');
+        $(".sidebar .sidebar-links").find('span').addClass('closed');
+        $('.sidebar .sidebar-links').find('span').fadeOut(300);
+
+    } else {
+        $(".sidebar").animate({
+            width: "193px"
+        }, 300);
+        $("body").addClass('opened');
+        $(".sidebar .sidebar-links").find('span').removeClass('closed');
+        $('.sidebar .sidebar-links span').show();
+    }
+}
