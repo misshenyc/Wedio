@@ -17,7 +17,9 @@ class CurrentUserVideo extends React.Component {
                 <br/>
                 <Link to={`/videos/${video.id}`}>
                     <p className = 'index-video-title'>{video.title}</p>
-                    <p className = 'index-video-creator'>{video.creator_id}</p>
+                    <p className = 'index-video-creator'>
+                        {video.creator.first_name} &nbsp; {video.creator.last_name}
+                    </p>
                 </Link>
             </li>
         )})
