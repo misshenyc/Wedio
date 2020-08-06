@@ -11,6 +11,8 @@ const CommentShow = (props) => {
         window.location.reload(false);
     }
     
+    debugger
+
     return(
         <div className = 'comment-content'>
             <span className ='comment-body'>{body} by {user_id}</span>

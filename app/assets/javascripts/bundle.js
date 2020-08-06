@@ -847,6 +847,7 @@ var CommentShow = function CommentShow(props) {
     window.location.reload(false);
   };
 
+  debugger;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -2749,7 +2750,7 @@ var mdp = function mdp(dispatch) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["undislikeVideo"])(videoId));
     },
     deleteComment: function deleteComment(commentId) {
-      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["deleteComment"])(comment));
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["deleteComment"])(commentId));
     }
   };
 };
