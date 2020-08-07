@@ -2866,9 +2866,8 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
       var editAction = function editAction() {};
 
       var editEle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
-      if (!this.props.user) return;
 
-      if (this.props.user.id === video.creator_id) {
+      if (this.props.user && this.props.user.id === video.creator_id) {
         // editAction = () => alert ('Only owner can edit video')
         editEle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "detail",

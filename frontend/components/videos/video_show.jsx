@@ -58,8 +58,7 @@ class VideoShow extends React.Component {
 
         let editAction = () => {}
         let editEle = <div></div>
-        if (!this.props.user) return;
-        if (this.props.user.id === video.creator_id) {
+        if (this.props.user && this.props.user.id === video.creator_id) {
             // editAction = () => alert ('Only owner can edit video')
             editEle = (
             <div className='detail' onClick={editAction}>
