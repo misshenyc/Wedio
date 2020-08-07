@@ -14,3 +14,5 @@ demo = User.create!(
     email: 'misshenyc@gmail.com',
     password: '123456'
 )
+
+Video.delete_all
