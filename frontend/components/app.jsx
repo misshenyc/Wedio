@@ -72,7 +72,3 @@ const menuClick = ()=>{
     }
 }
 
-//TODOS: not video owner can edit videos not belonging to them; 
-//TODOS: loggedin user can not like or unlike the video;
-//TODOS: show video's geo tags on a map
-//TODOS: clear search input once searched

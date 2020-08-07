@@ -6,7 +6,7 @@ import VideoEditLink from '../../util/link_util'
 import { ProtectedRoute } from '../../util/route_util';
 import CommentShow from '../comments/comment_show';
 import {openEditModal} from '../../actions/modal_actions';
-//TODO change edit video page to modal instead of still page;
+
 class VideoShow extends React.Component {
     
     componentDidMount() {
@@ -24,12 +24,11 @@ class VideoShow extends React.Component {
             history } = this.props;
         
         if (!video) return null;
-
         let likeAction = () => {}
         let dislikeAction = () => {}
         let likeText = 'LIKE'
         let dislikeText = 'DISLIKE'
-        if (!this.props.users){
+        if (!this.props.user){
             likeAction = () => history.push('/login')
             dislikeAction = () => history.push('/login')
         } else {       
@@ -56,7 +55,23 @@ class VideoShow extends React.Component {
                     history = {history}
                 />)
         }
-        
+
+        let editAction = () => {}
+        let editEle = <div></div>
+        debugger
+        if (this.props.user.id === video.creator_id) {
+            // editAction = () => alert ('Only owner can edit video')
+            editEle = (
+            <div className='detail' onClick={editAction}>
+                <i className="far fa-edit"></i>
+                <VideoEditLink
+                    component={EditVideoContainer}
+                    to={`/videos/${video.id}/edit`}
+                    label="EDIT"
+                />
+            </div>)
+        }
+
         return (
             <div className = 'video-show'>
                 <video className = 'show-video-clip' src={video.clipUrl} controls/>
@@ -78,14 +93,7 @@ class VideoShow extends React.Component {
                             <i className="fas fa-share"></i> 
                             <p> SHARE </p>
                         </div>
-                        <div className='detail'>
-                            <i className="far fa-edit"></i>
-                            <VideoEditLink
-                                component={EditVideoContainer}
-                                to={`/videos/${video.id}/edit`}
-                                label="EDIT"
-                            />
-                        </div>
+                        {editEle}
                         {/* <button onClick={() => dispatch(openEditModal())}>
                             <i className="fas fa-cloud-upload-alt fa-lg"></i>
                             <br />

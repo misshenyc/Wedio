@@ -561,10 +561,7 @@ var menuClick = function menuClick() {
     $(".sidebar .sidebar-links").find('span').removeClass('closed');
     $('.sidebar .sidebar-links span').show();
   }
-}; //TODOS: not video owner can edit videos not belonging to them; 
-//TODOS: loggedin user can not like or unlike the video;
-//TODOS: show video's geo tags on a map
-//TODOS: clear search input once searched
+};
 
 /***/ }),
 
@@ -2781,7 +2778,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- //TODO change edit video page to modal instead of still page;
+
 
 var VideoShow = /*#__PURE__*/function (_React$Component) {
   _inherits(VideoShow, _React$Component);
@@ -2819,7 +2816,7 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
       var likeText = 'LIKE';
       var dislikeText = 'DISLIKE';
 
-      if (!this.props.users) {
+      if (!this.props.user) {
         likeAction = function likeAction() {
           return history.push('/login');
         };
@@ -2866,6 +2863,25 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         });
       };
 
+      var editAction = function editAction() {};
+
+      var editEle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      debugger;
+
+      if (this.props.user.id === video.creator_id) {
+        // editAction = () => alert ('Only owner can edit video')
+        editEle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "detail",
+          onClick: editAction
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "far fa-edit"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          component: _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_3__["default"],
+          to: "/videos/".concat(video.id, "/edit"),
+          label: "EDIT"
+        }));
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
@@ -2894,15 +2910,7 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
         className: "detail"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-share"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " SHARE ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "detail"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "far fa-edit"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        component: _videos_edit_video_container__WEBPACK_IMPORTED_MODULE_3__["default"],
-        to: "/videos/".concat(video.id, "/edit"),
-        label: "EDIT"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " SHARE ")), editEle)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_link_util__WEBPACK_IMPORTED_MODULE_2__["default"], {
         component: _comments_comment_form_container__WEBPACK_IMPORTED_MODULE_1__["default"],
         to: "/videos/".concat(video.id, "/comment"),
         label: "Add a public comment"
@@ -2942,7 +2950,7 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state, ownProps) {
   return {
     video: state.entities.videos[ownProps.match.params.videoId],
-    user: state.entities.users
+    user: Object.values(state.entities.users)[0]
   };
 };
 
