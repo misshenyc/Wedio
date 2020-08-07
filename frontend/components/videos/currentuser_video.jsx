@@ -8,7 +8,6 @@ class CurrentUserVideo extends React.Component {
 
     render() {
         const currentuserVideos = this.props.videos.filter(video => video.creator_id === this.props.user.id)
-        
         const videoLis = currentuserVideos.map(video => {
             return (<li key = {video.id} className = 'index-video-container'>
                 <video controls className = 'index-video-clip'>

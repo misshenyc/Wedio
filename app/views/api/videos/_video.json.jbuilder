@@ -1,4 +1,4 @@
-json.extract! video, :id, :title, :description, :creator_id
+json.extract! video, :id, :title, :description, :creator_id, :lat, :lng
 
 if current_user.present?
     json.likes video.likes.count

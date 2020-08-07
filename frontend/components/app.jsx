@@ -7,14 +7,14 @@ import LogInFormContainer from './session_form/login_form_container';
 import VideoIndexContainer from './videos/video_index_container';
 import VideoShowContainer from './videos/video_show_container';
 import EditVideoContainer from './videos/edit_video_container';
-import SearchResultContainer from './search/search_result_container'
+import SearchResultContainer from './search/search_result_container';
+import VideoMapContainer from './videos/video_map_container';
 import EditCommentContainer from './comments/comment_edit_container'
 import SideBar from './sidebar/sidebar'
 import CurrentUserVideoContainer from './videos/currentuser_video_container';
 import ModalContainer from './modal/modal';
 import SearchBar from './search/search_bar';
 import SearchBarContainer from './search/search_bar_container'
-
 
 const App = () => (
     <div className = 'full-height'>
@@ -26,7 +26,7 @@ const App = () => (
                     onClick = {()=>menuClick()}
                 />           
                 <Link to="/" className="header-link">
-                    <img id = 'full-logo' src = {window.fullLogo}/>           
+                    <img id = 'full-logo' src = {window.newLogo}/>           
                 </Link>
                 <SearchBarContainer />
                 <GreetingContainer />
@@ -40,6 +40,7 @@ const App = () => (
             {/* <Route path="/" component={SearchBarContainer} /> */}
             <ProtectedRoute path="/videos/:videoId/edit" component={EditVideoContainer} />
             <Route path = '/videos/search' component = {SearchResultContainer}/>
+            <Route path="/videos/map" component={VideoMapContainer} />
             <Route path="/videos/:videoId" component={VideoShowContainer} />
             <ProtectedRoute path="/users/video" component={CurrentUserVideoContainer} />
             <AuthRoute exact path="/login" component={LogInFormContainer} />

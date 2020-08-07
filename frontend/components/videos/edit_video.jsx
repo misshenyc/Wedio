@@ -19,6 +19,8 @@ class EditVideo extends React.Component {
     }
 
     render() {
+        if (!this.state.lat) this.state.lat = '';
+        if (!this.state.lng) this.state.lng = '';
         return (
             <div className = 'edit-video'>
                 <h3>Edit Video Details</h3>
@@ -41,6 +43,26 @@ class EditVideo extends React.Component {
                             value={this.state.description}
                             onChange={this.update('description')}
                             placeholder = 'Tell viewers about your video'
+                        />
+                    </div>
+                    <div className='edit-lat-container'>
+                        <span>Latitude </span>
+                        <input
+                            className='edit-lat'
+                            type='text'
+                            value={this.state.lat}
+                            onChange={this.update('lat')}
+                            placeholder='Enter a value between -90 and 90'
+                        />
+                    </div>
+                    <div className='edit-lng-container'>
+                        <span>Longtitude </span>
+                        <input
+                            className='edit-lng'
+                            type='text'
+                            value={this.state.lng}
+                            onChange={this.update('lng')}
+                            placeholder='Enter a value between -180 and 180'
                         />
                     </div>
                     <button>Save</button>

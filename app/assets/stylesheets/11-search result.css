@@ -43,13 +43,14 @@
     flex-direction: column;
     align-items: left;
     text-align: left;
+    color: #606060;
     margin-left: 20px;
 }
 
 .search-video-title{
     font-size: 16px;
     font-weight: bold;
-    color: #030303;
+    color: #606060;
     margin: 3px;
     text-align: left;
 }
@@ -78,4 +79,5 @@
     padding: 8px 0 0;
     text-align: left;
     overflow: auto;
+    color: #606060;
 }

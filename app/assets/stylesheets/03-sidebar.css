@@ -15,7 +15,7 @@
     z-index: 10;
 }
 
-.home, .library, .upload, .linkedin, .github {
+.home, .library, .upload, .linkedin, .github, .map {
     padding: 16px 0 14px;
     display: flex;
     flex-direction:  column;
@@ -30,7 +30,7 @@
     align-items: center;
 }
 
-.home:hover, .library:hover, .upload:hover, .linkedin:hover, .github:hover  {
+.home:hover, .library:hover, .upload:hover, .linkedin:hover, .github:hover, .map:hover  {
     background-color: #eeeeee;
     cursor: pointer;
 }

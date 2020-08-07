@@ -12,6 +12,8 @@ class CreateVideo extends React.Component {
         const formData = new FormData();
         formData.append('video[title]', this.state.title);
         formData.append('video[description]', this.state.description);
+        formData.append('video[lat]', this.state.lat);
+        formData.append('video[lng]', this.state.lng);
         if (this.state.videoFile) {
             formData.append('video[videoclip]', this.state.videoFile);
         }
@@ -75,7 +77,20 @@ class CreateVideo extends React.Component {
                                     placeholder = 'Title (required)'
                                     className = 'upload-title'
                                 />
-                                <br/>
+                                <input
+                                    type='number'
+                                    value={this.state.lat}
+                                    onChange={this.update('lat')}
+                                    placeholder='Latitude(-90 to 90)'
+                                    className='upload-lat'
+                                />
+                                <input
+                                    type='number'
+                                    value={this.state.lng}
+                                    onChange={this.update('lng')}
+                                    placeholder='Latitude(-180 to 180)'
+                                    className='upload-lng'
+                                />
                                 <textarea
                                     value={this.state.description}
                                     onChange={this.update('description')}

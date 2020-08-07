@@ -7,24 +7,11 @@
     padding-right: 40%;
     background-color: #fafafa;
     padding-bottom: 300px;
-    padding-top: 100px;
+    padding-top: 70px;
     padding-left: 40px;
 }
 
-.edit-title{
-    font-size: 14px;
-    border: solid 1px #ccc;
-    height: 30px;
-    text-align: justify;
-    padding: 5px;
-    border-radius: 5px;
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    display: block
-}
-
-.edit-description{
+.edit-title, .edit-description, .edit-lat, .edit-lng{
     font-size: 14px;
     border: solid 1px #ccc;
     height: 30px;

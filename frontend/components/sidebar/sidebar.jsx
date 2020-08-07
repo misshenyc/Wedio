@@ -14,7 +14,7 @@ function SideBar() {
             </div>    
             <div className='library'>
                 <Link to='/users/video' className='sidebar-links'>
-                    <i className="fas fa-photo-video  fa-lg"></i>
+                    <i className="fas fa-photo-video fa-lg"></i>
                     <br />
                     <span> Library </span>
                 </Link>   
@@ -25,6 +25,13 @@ function SideBar() {
                     <br />
                     <span> Upload </span>                
                 </button>            
+            </div>
+            <div className='map'>
+                <Link to='/videos/map' className='sidebar-links'>
+                    <i className="fas fa-map-marked-alt  fa-lg"></i>
+                    <br />
+                    <span> Map </span>
+                </Link>
             </div>      
             <div className='linkedin'>
                 <a href="https://www.linkedin.com/in/milliehe/" className='sidebar-links'>
