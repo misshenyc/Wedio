@@ -1801,7 +1801,7 @@ function SideBar() {
     className: "sidebar-links"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-photo-video fa-lg"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " Library "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, " My Videos "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "upload"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
@@ -2781,7 +2781,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
+ //TODO change edit video page to modal instead of still page;
 
 var VideoShow = /*#__PURE__*/function (_React$Component) {
   _inherits(VideoShow, _React$Component);
@@ -2811,32 +2811,46 @@ var VideoShow = /*#__PURE__*/function (_React$Component) {
           deleteComment = _this$props.deleteComment,
           history = _this$props.history;
       if (!video) return null;
+
+      var likeAction = function likeAction() {};
+
+      var dislikeAction = function dislikeAction() {};
+
       var likeText = 'LIKE';
-
-      var likeAction = function likeAction() {
-        return likeVideo(video.id);
-      };
-
-      if (video.liked_by_current_user) {
-        likeText = 'UNDO';
-
-        likeAction = function likeAction() {
-          return unlikeVideo(video.id);
-        };
-      }
-
       var dislikeText = 'DISLIKE';
 
-      var dislikeAction = function dislikeAction() {
-        return dislikeVideo(video.id);
-      };
-
-      if (video.disliked_by_current_user) {
-        dislikeText = 'UNDO';
+      if (!this.props.users) {
+        likeAction = function likeAction() {
+          return history.push('/login');
+        };
 
         dislikeAction = function dislikeAction() {
-          return undislikeVideo(video.id);
+          return history.push('/login');
         };
+      } else {
+        likeAction = function likeAction() {
+          return likeVideo(video.id);
+        };
+
+        if (video.liked_by_current_user) {
+          likeText = 'UNDO';
+
+          likeAction = function likeAction() {
+            return unlikeVideo(video.id);
+          };
+        }
+
+        dislikeAction = function dislikeAction() {
+          return dislikeVideo(video.id);
+        };
+
+        if (video.disliked_by_current_user) {
+          dislikeText = 'UNDO';
+
+          dislikeAction = function dislikeAction() {
+            return undislikeVideo(video.id);
+          };
+        }
       }
 
       var commentList = function commentList(comments, deleteComment) {
@@ -2927,7 +2941,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   return {
-    video: state.entities.videos[ownProps.match.params.videoId]
+    video: state.entities.videos[ownProps.match.params.videoId],
+    user: state.entities.users
   };
 };
 

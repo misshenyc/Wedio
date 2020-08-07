@@ -16,7 +16,7 @@ function SideBar() {
                 <Link to='/users/video' className='sidebar-links'>
                     <i className="fas fa-photo-video fa-lg"></i>
                     <br />
-                    <span> Library </span>
+                    <span> My Videos </span>
                 </Link>   
             </div>
             <div className='upload'>

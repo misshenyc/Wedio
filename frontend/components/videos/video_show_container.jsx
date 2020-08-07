@@ -10,6 +10,7 @@ import {
 const msp = (state, ownProps) => {
     return {
         video: state.entities.videos[ownProps.match.params.videoId],
+        user: state.entities.users
     }
 };
 

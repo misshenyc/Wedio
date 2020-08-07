@@ -6,7 +6,7 @@ import VideoEditLink from '../../util/link_util'
 import { ProtectedRoute } from '../../util/route_util';
 import CommentShow from '../comments/comment_show';
 import {openEditModal} from '../../actions/modal_actions';
-
+//TODO change edit video page to modal instead of still page;
 class VideoShow extends React.Component {
     
     componentDidMount() {
@@ -25,18 +25,24 @@ class VideoShow extends React.Component {
         
         if (!video) return null;
 
+        let likeAction = () => {}
+        let dislikeAction = () => {}
         let likeText = 'LIKE'
-        let likeAction = () => likeVideo(video.id);
-        if (video.liked_by_current_user) {
-            likeText = 'UNDO';
-            likeAction = () => unlikeVideo(video.id);
-        }
-        
         let dislikeText = 'DISLIKE'
-        let dislikeAction = () => dislikeVideo(video.id);
-        if (video.disliked_by_current_user) {
-            dislikeText = 'UNDO';
-            dislikeAction = () => undislikeVideo(video.id);
+        if (!this.props.users){
+            likeAction = () => history.push('/login')
+            dislikeAction = () => history.push('/login')
+        } else {       
+            likeAction = () => likeVideo(video.id);
+            if (video.liked_by_current_user) {
+                likeText = 'UNDO';
+                likeAction = () => unlikeVideo(video.id);
+            }
+            dislikeAction = () => dislikeVideo(video.id);
+            if (video.disliked_by_current_user) {
+                dislikeText = 'UNDO';
+                dislikeAction = () => undislikeVideo(video.id);
+            }
         }
 
         const commentList = (comments, deleteComment) => {
