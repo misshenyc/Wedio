@@ -50,7 +50,7 @@ class Api::VideosController < ApplicationController
             likeable_id: params[:id], 
             likeable_type: 'Video')
         if like.save!
-            render current_user.videos.find(params[:id])
+            render Video.find(params[:id])
         else
             render json: like.errors.full_messages, status: 422
         end
@@ -62,7 +62,7 @@ class Api::VideosController < ApplicationController
             likeable_id: params[:id], 
             likeable_type: 'Video')
         if like.destroy
-            render current_user.videos.find(params[:id])
+            render Video.find(params[:id])
         else
             render json: like.errors.full_messages, status: 422
         end
@@ -74,7 +74,7 @@ class Api::VideosController < ApplicationController
             dislikeable_id: params[:id], 
             dislikeable_type: 'Video')
         if dislike.save!
-            render current_user.videos.find(params[:id])
+            render Video.find(params[:id])
         else
             render json: dislike.errors.full_messages, status: 422
         end
@@ -86,7 +86,7 @@ class Api::VideosController < ApplicationController
             dislikeable_id: params[:id], 
             dislikeable_type: 'Video')
         if dislike.destroy
-            render current_user.videos.find(params[:id])
+            render Video.find(params[:id])
         else
             render json: dislike.errors.full_messages, status: 422
         end

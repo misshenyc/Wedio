@@ -9,19 +9,14 @@ class SearchBar extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }    
 
-
-    refreshPage () {
-        window.location.reload(false);
-    }
-
     update(e){
         this.setState({input: e.target.value});
     }
 
     handleSubmit(e){
         e.preventDefault();
-        
         this.props.history.push(`/videos/search?query=${this.state.input}`)
+        this.setState({input:''});
     }
 
     render() {

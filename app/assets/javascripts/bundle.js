@@ -561,7 +561,10 @@ var menuClick = function menuClick() {
     $(".sidebar .sidebar-links").find('span').removeClass('closed');
     $('.sidebar .sidebar-links span').show();
   }
-};
+}; //TODOS: not video owner can edit videos not belonging to them; 
+//TODOS: loggedin user can not like or unlike the video;
+//TODOS: show video's geo tags on a map
+//TODOS: clear search input once searched
 
 /***/ }),
 
@@ -1178,11 +1181,6 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SearchBar, [{
-    key: "refreshPage",
-    value: function refreshPage() {
-      window.location.reload(false);
-    }
-  }, {
     key: "update",
     value: function update(e) {
       this.setState({
@@ -1194,6 +1192,9 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       this.props.history.push("/videos/search?query=".concat(this.state.input));
+      this.setState({
+        input: ''
+      });
     }
   }, {
     key: "render",
@@ -2546,7 +2547,6 @@ var VideoIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var videoLis = this.props.videos.map(function (video) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: video.id,
