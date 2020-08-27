@@ -41,12 +41,13 @@ class SignupForm extends React.Component {
     }
 
     render() {
+        debugger;
         return (
             <div className="form-container">
                 <h1> Join the Community </h1>
                 <form onSubmit={this.handleSubmit} className="form-box">
                     <br />
-                    <p className='error-messages'>{this.renderErrors()}</p>
+                    <div className='error-messages'>{this.renderErrors()}</div>
                     <br />
                     <div className="form">
                         <input type="text"

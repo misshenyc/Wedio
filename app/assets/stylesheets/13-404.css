@@ -1,0 +1,34 @@
+.page404 {
+    margin-left:75px;
+    padding: 30px;
+    background-color: #fafafa;
+    padding-bottom: 300px;
+    padding-top: 100px;
+}
+
+.backhome{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    /* display:inline-block; */
+    font:normal normal 300 1.3em 'Roboto';
+    font-size: 12px;
+    text-decoration:none;	
+    color:#FF0000;
+    background-color:transparent;
+    border:1px solid #FF0000;
+    border-radius:100px;
+    padding: .3em 1.2em;
+    margin:5px;
+    background-size: 200% 100%;	
+    background-image: linear-gradient(to right, transparent 50%, #FF0000);
+    transition: background-position .3s cubic-bezier(0.19, 1, 0.22, 1) .1s, color .5s ease 0s, background-color .5s ease;
+}
+
+.backhome:hover{
+    color:white;
+    background-color:#FF0000;
+    background-position: -100% 100%;
+}
+
+

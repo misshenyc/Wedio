@@ -13,8 +13,8 @@ import EditCommentContainer from './comments/comment_edit_container'
 import SideBar from './sidebar/sidebar'
 import CurrentUserVideoContainer from './videos/currentuser_video_container';
 import ModalContainer from './modal/modal';
-import SearchBar from './search/search_bar';
-import SearchBarContainer from './search/search_bar_container'
+import SearchBarContainer from './search/search_bar_container';
+import GenericNotFound from './notfound';
 
 const App = () => (
     <div className = 'full-height'>
@@ -38,14 +38,15 @@ const App = () => (
         <Switch>
             <Route exact path="/" component={VideoIndexContainer} />
             {/* <Route path="/" component={SearchBarContainer} /> */}
-            <ProtectedRoute path="/videos/:videoId/edit" component={EditVideoContainer} />
-            <Route path = '/videos/search' component = {SearchResultContainer}/>
-            <Route path="/videos/map" component={VideoMapContainer} />
-            <Route path="/videos/:videoId" component={VideoShowContainer} />
-            <ProtectedRoute path="/users/video" component={CurrentUserVideoContainer} />
+            <ProtectedRoute exact path="/videos/:videoId/edit" component={EditVideoContainer} />
+            <Route exact path = '/videos/search' component = {SearchResultContainer}/>
+            <Route exact path="/videos/map" component={VideoMapContainer} />
+            <Route exact path="/videos/:videoId" component={VideoShowContainer} />
+            <ProtectedRoute excat path="/users/video" component={CurrentUserVideoContainer} />
             <AuthRoute exact path="/login" component={LogInFormContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
             <ProtectedRoute exact path="/videos/:videoId/comment/:commentId/edit" component={EditCommentContainer}/>
+            <Route component={GenericNotFound} />
         </Switch>
     </div>
 );

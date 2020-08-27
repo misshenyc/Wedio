@@ -29,6 +29,7 @@ class LoginForm extends React.Component {
     }
 
     renderErrors() {
+        debugger;
         return (
             <ul>
                 {this.props.errors.map((error, i) => (
@@ -43,6 +44,7 @@ class LoginForm extends React.Component {
 
 
     render() {
+        debugger;
         return (
             <div className="form-container">
                 <h1> Welcome back! {this.state.first_name} {this.state.last_name} </h1>
