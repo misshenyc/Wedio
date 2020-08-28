@@ -24,31 +24,31 @@ class SignupForm extends React.Component {
         this.props.processForm(user);
     }
 
-    renderErrors() {
-        return (
-            <ul>
-                {this.props.errors.map((error, i) => (
-                    <li key={`error-${i}`}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
-        );
-    }
+    // renderErrors() {
+    //     return (
+    //         <ul>
+    //             {this.props.errors.map((error, i) => (
+    //                 <li key={`error-${i}`}>
+    //                     {error}
+    //                 </li>
+    //             ))}
+    //         </ul>
+    //     );
+    // }
 
     componentWillUnmount() {
         this.props.clearErrors();
     }
 
     render() {
-        debugger;
+        // debugger;
         return (
             <div className="form-container">
                 <h1> Join the Community </h1>
                 <form onSubmit={this.handleSubmit} className="form-box">
-                    <br />
+                    {/* <br />
                     <div className='error-messages'>{this.renderErrors()}</div>
-                    <br />
+                    <br /> */}
                     <div className="form">
                         <input type="text"
                                 value={this.state.email}
@@ -56,18 +56,21 @@ class SignupForm extends React.Component {
                                 placeholder="Email"
                                 onChange={this.update('email')}
                             />
+                        <div className = 'error-messages'>{this.props.errors.filter(error=> error.includes('Email'))}</div>
                         <input type="text"
                                 value={this.state.first_name}
                                 className="form-input"
                                 placeholder="First Name"
                                 onChange={this.update('first_name')}
                             />
+                        <div className='error-messages'>{this.props.errors.filter(error => error.includes('First name'))}</div>
                         <input type="text"
                                 value={this.state.last_name}
                                 className="form-input"
                                 placeholder="Last Name"
                                 onChange={this.update('last_name')}
                             />
+                        <div className='error-messages'>{this.props.errors.filter(error => error.includes('Last name'))}</div>
                         <input type="password"
                                 value={this.state.password}
                                 className="form-input"
@@ -75,6 +78,7 @@ class SignupForm extends React.Component {
                                 onChange={this.update('password')}
                             />
                         <br />
+                        <div className='error-messages'>{this.props.errors.filter(error => error.includes('Password'))}</div>
                         <input className="session-submit" type="submit" value={this.props.formType} />
                         <p className = 'alternative'> {this.props.navLink} </p>
                     </div>

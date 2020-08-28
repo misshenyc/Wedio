@@ -28,18 +28,18 @@ class LoginForm extends React.Component {
         this.props.processForm(user);
     }
 
-    renderErrors() {
-        debugger;
-        return (
-            <ul>
-                {this.props.errors.map((error, i) => (
-                    <li key={`error-${i}`}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
-        );
-    }
+    // renderErrors() {
+    //     debugger;
+    //     return (
+    //         <ul>
+    //             {this.props.errors.map((error, i) => (
+    //                 <li key={`error-${i}`}>
+    //                     {error}
+    //                 </li>
+    //             ))}
+    //         </ul>
+    //     );
+    // }
 
 
 
@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
                 <h1> Welcome back! {this.state.first_name} {this.state.last_name} </h1>
                 <form onSubmit={this.handleSubmit}>
                 <br />
-                    <div className = 'error-messages'>{this.renderErrors()}</div>
+                    {/* <div className = 'error-messages'>{this.renderErrors()}</div> */}
                     <br />
                     <div className="form">
                         <br />
@@ -60,14 +60,14 @@ class LoginForm extends React.Component {
                                 className="form-input"
                                 placeholder="Email"
                             />
-                        <br />
+                        <div className='error-messages'>{this.props.errors.filter(error => error.includes('username'))}</div>
                         <input type="password"
                                 value={this.state.password}
                                 onChange={this.update('password')}
                                 className="form-input"
                                 placeholder="Password"
                             />
-                        <br />
+                        <div className='error-messages'>{this.props.errors.filter(error => error.includes('password'))}</div>
                         <input className="session-submit" type="submit" value={this.props.formType} />
                         <p className='alternative'> {this.props.navLink} </p>
                     </div>
